@@ -1,0 +1,590 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B3DAB0F8278ECD1700CCC029 /* Farm_FinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB0F7278ECD1700CCC029 /* Farm_FinderApp.swift */; };
+		B3DAB0FA278ECD1700CCC029 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB0F9278ECD1700CCC029 /* ContentView.swift */; };
+		B3DAB0FC278ECD1F00CCC029 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3DAB0FB278ECD1F00CCC029 /* Assets.xcassets */; };
+		B3DAB0FF278ECD1F00CCC029 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3DAB0FE278ECD1F00CCC029 /* Preview Assets.xcassets */; };
+		B3DAB109278ECD2100CCC029 /* Farm_FinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB108278ECD2100CCC029 /* Farm_FinderTests.swift */; };
+		B3DAB113278ECD2100CCC029 /* Farm_FinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB112278ECD2100CCC029 /* Farm_FinderUITests.swift */; };
+		B3DAB115278ECD2100CCC029 /* Farm_FinderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB114278ECD2100CCC029 /* Farm_FinderUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B3DAB105278ECD2100CCC029 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3DAB0EC278ECD1600CCC029 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B3DAB0F3278ECD1700CCC029;
+			remoteInfo = "Farm-Finder";
+		};
+		B3DAB10F278ECD2100CCC029 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B3DAB0EC278ECD1600CCC029 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B3DAB0F3278ECD1700CCC029;
+			remoteInfo = "Farm-Finder";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B3DAB0F4278ECD1700CCC029 /* Farm-Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Farm-Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3DAB0F7278ECD1700CCC029 /* Farm_FinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm_FinderApp.swift; sourceTree = "<group>"; };
+		B3DAB0F9278ECD1700CCC029 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B3DAB0FB278ECD1F00CCC029 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B3DAB0FE278ECD1F00CCC029 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B3DAB104278ECD2100CCC029 /* Farm-FinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Farm-FinderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3DAB108278ECD2100CCC029 /* Farm_FinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm_FinderTests.swift; sourceTree = "<group>"; };
+		B3DAB10E278ECD2100CCC029 /* Farm-FinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Farm-FinderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3DAB112278ECD2100CCC029 /* Farm_FinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm_FinderUITests.swift; sourceTree = "<group>"; };
+		B3DAB114278ECD2100CCC029 /* Farm_FinderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm_FinderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B3DAB0F1278ECD1700CCC029 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3DAB101278ECD2100CCC029 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3DAB10B278ECD2100CCC029 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B3DAB0EB278ECD1600CCC029 = {
+			isa = PBXGroup;
+			children = (
+				B3DAB0F6278ECD1700CCC029 /* Farm-Finder */,
+				B3DAB107278ECD2100CCC029 /* Farm-FinderTests */,
+				B3DAB111278ECD2100CCC029 /* Farm-FinderUITests */,
+				B3DAB0F5278ECD1700CCC029 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B3DAB0F5278ECD1700CCC029 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B3DAB0F4278ECD1700CCC029 /* Farm-Finder.app */,
+				B3DAB104278ECD2100CCC029 /* Farm-FinderTests.xctest */,
+				B3DAB10E278ECD2100CCC029 /* Farm-FinderUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B3DAB0F6278ECD1700CCC029 /* Farm-Finder */ = {
+			isa = PBXGroup;
+			children = (
+				B3DAB0F7278ECD1700CCC029 /* Farm_FinderApp.swift */,
+				B3DAB0F9278ECD1700CCC029 /* ContentView.swift */,
+				B3DAB0FB278ECD1F00CCC029 /* Assets.xcassets */,
+				B3DAB0FD278ECD1F00CCC029 /* Preview Content */,
+			);
+			path = "Farm-Finder";
+			sourceTree = "<group>";
+		};
+		B3DAB0FD278ECD1F00CCC029 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B3DAB0FE278ECD1F00CCC029 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		B3DAB107278ECD2100CCC029 /* Farm-FinderTests */ = {
+			isa = PBXGroup;
+			children = (
+				B3DAB108278ECD2100CCC029 /* Farm_FinderTests.swift */,
+			);
+			path = "Farm-FinderTests";
+			sourceTree = "<group>";
+		};
+		B3DAB111278ECD2100CCC029 /* Farm-FinderUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B3DAB112278ECD2100CCC029 /* Farm_FinderUITests.swift */,
+				B3DAB114278ECD2100CCC029 /* Farm_FinderUITestsLaunchTests.swift */,
+			);
+			path = "Farm-FinderUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B3DAB0F3278ECD1700CCC029 /* Farm-Finder */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B3DAB118278ECD2100CCC029 /* Build configuration list for PBXNativeTarget "Farm-Finder" */;
+			buildPhases = (
+				B3DAB0F0278ECD1700CCC029 /* Sources */,
+				B3DAB0F1278ECD1700CCC029 /* Frameworks */,
+				B3DAB0F2278ECD1700CCC029 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Farm-Finder";
+			productName = "Farm-Finder";
+			productReference = B3DAB0F4278ECD1700CCC029 /* Farm-Finder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B3DAB103278ECD2100CCC029 /* Farm-FinderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B3DAB11B278ECD2100CCC029 /* Build configuration list for PBXNativeTarget "Farm-FinderTests" */;
+			buildPhases = (
+				B3DAB100278ECD2100CCC029 /* Sources */,
+				B3DAB101278ECD2100CCC029 /* Frameworks */,
+				B3DAB102278ECD2100CCC029 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B3DAB106278ECD2100CCC029 /* PBXTargetDependency */,
+			);
+			name = "Farm-FinderTests";
+			productName = "Farm-FinderTests";
+			productReference = B3DAB104278ECD2100CCC029 /* Farm-FinderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B3DAB10D278ECD2100CCC029 /* Farm-FinderUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B3DAB11E278ECD2100CCC029 /* Build configuration list for PBXNativeTarget "Farm-FinderUITests" */;
+			buildPhases = (
+				B3DAB10A278ECD2100CCC029 /* Sources */,
+				B3DAB10B278ECD2100CCC029 /* Frameworks */,
+				B3DAB10C278ECD2100CCC029 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B3DAB110278ECD2100CCC029 /* PBXTargetDependency */,
+			);
+			name = "Farm-FinderUITests";
+			productName = "Farm-FinderUITests";
+			productReference = B3DAB10E278ECD2100CCC029 /* Farm-FinderUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B3DAB0EC278ECD1600CCC029 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					B3DAB0F3278ECD1700CCC029 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					B3DAB103278ECD2100CCC029 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = B3DAB0F3278ECD1700CCC029;
+					};
+					B3DAB10D278ECD2100CCC029 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = B3DAB0F3278ECD1700CCC029;
+					};
+				};
+			};
+			buildConfigurationList = B3DAB0EF278ECD1600CCC029 /* Build configuration list for PBXProject "Farm-Finder" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B3DAB0EB278ECD1600CCC029;
+			productRefGroup = B3DAB0F5278ECD1700CCC029 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B3DAB0F3278ECD1700CCC029 /* Farm-Finder */,
+				B3DAB103278ECD2100CCC029 /* Farm-FinderTests */,
+				B3DAB10D278ECD2100CCC029 /* Farm-FinderUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B3DAB0F2278ECD1700CCC029 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3DAB0FF278ECD1F00CCC029 /* Preview Assets.xcassets in Resources */,
+				B3DAB0FC278ECD1F00CCC029 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3DAB102278ECD2100CCC029 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3DAB10C278ECD2100CCC029 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B3DAB0F0278ECD1700CCC029 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3DAB0FA278ECD1700CCC029 /* ContentView.swift in Sources */,
+				B3DAB0F8278ECD1700CCC029 /* Farm_FinderApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3DAB100278ECD2100CCC029 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3DAB109278ECD2100CCC029 /* Farm_FinderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3DAB10A278ECD2100CCC029 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3DAB115278ECD2100CCC029 /* Farm_FinderUITestsLaunchTests.swift in Sources */,
+				B3DAB113278ECD2100CCC029 /* Farm_FinderUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B3DAB106278ECD2100CCC029 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B3DAB0F3278ECD1700CCC029 /* Farm-Finder */;
+			targetProxy = B3DAB105278ECD2100CCC029 /* PBXContainerItemProxy */;
+		};
+		B3DAB110278ECD2100CCC029 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B3DAB0F3278ECD1700CCC029 /* Farm-Finder */;
+			targetProxy = B3DAB10F278ECD2100CCC029 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B3DAB116278ECD2100CCC029 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B3DAB117278ECD2100CCC029 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B3DAB119278ECD2100CCC029 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Farm-Finder/Preview Content\"";
+				DEVELOPMENT_TEAM = JYXM9GFJ7A;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.exemple.Farm-Finder";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B3DAB11A278ECD2100CCC029 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Farm-Finder/Preview Content\"";
+				DEVELOPMENT_TEAM = JYXM9GFJ7A;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.exemple.Farm-Finder";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B3DAB11C278ECD2100CCC029 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JYXM9GFJ7A;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.exemple.Farm-FinderTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Farm-Finder.app/Farm-Finder";
+			};
+			name = Debug;
+		};
+		B3DAB11D278ECD2100CCC029 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JYXM9GFJ7A;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.exemple.Farm-FinderTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Farm-Finder.app/Farm-Finder";
+			};
+			name = Release;
+		};
+		B3DAB11F278ECD2100CCC029 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JYXM9GFJ7A;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.exemple.Farm-FinderUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Farm-Finder";
+			};
+			name = Debug;
+		};
+		B3DAB120278ECD2100CCC029 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JYXM9GFJ7A;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.exemple.Farm-FinderUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Farm-Finder";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B3DAB0EF278ECD1600CCC029 /* Build configuration list for PBXProject "Farm-Finder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B3DAB116278ECD2100CCC029 /* Debug */,
+				B3DAB117278ECD2100CCC029 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B3DAB118278ECD2100CCC029 /* Build configuration list for PBXNativeTarget "Farm-Finder" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B3DAB119278ECD2100CCC029 /* Debug */,
+				B3DAB11A278ECD2100CCC029 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B3DAB11B278ECD2100CCC029 /* Build configuration list for PBXNativeTarget "Farm-FinderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B3DAB11C278ECD2100CCC029 /* Debug */,
+				B3DAB11D278ECD2100CCC029 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B3DAB11E278ECD2100CCC029 /* Build configuration list for PBXNativeTarget "Farm-FinderUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B3DAB11F278ECD2100CCC029 /* Debug */,
+				B3DAB120278ECD2100CCC029 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B3DAB0EC278ECD1600CCC029 /* Project object */;
+}
