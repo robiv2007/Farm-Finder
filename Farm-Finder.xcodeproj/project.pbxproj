@@ -14,6 +14,11 @@
 		B3DAB109278ECD2100CCC029 /* Farm_FinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB108278ECD2100CCC029 /* Farm_FinderTests.swift */; };
 		B3DAB113278ECD2100CCC029 /* Farm_FinderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB112278ECD2100CCC029 /* Farm_FinderUITests.swift */; };
 		B3DAB115278ECD2100CCC029 /* Farm_FinderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB114278ECD2100CCC029 /* Farm_FinderUITestsLaunchTests.swift */; };
+		B3DAB122278ED14800CCC029 /* FarmEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB121278ED14800CCC029 /* FarmEntry.swift */; };
+		B3DAB124278ED29200CCC029 /* FarmPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB123278ED29200CCC029 /* FarmPage.swift */; };
+		B3DAB126278ED5BD00CCC029 /* FarmEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB125278ED5BD00CCC029 /* FarmEntryView.swift */; };
+		B3DAB12A278EDEBF00CCC029 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB129278EDEBF00CCC029 /* MapView.swift */; };
+		B3DAB12C278EE1FE00CCC029 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB12B278EE1FE00CCC029 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +49,11 @@
 		B3DAB10E278ECD2100CCC029 /* Farm-FinderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Farm-FinderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DAB112278ECD2100CCC029 /* Farm_FinderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm_FinderUITests.swift; sourceTree = "<group>"; };
 		B3DAB114278ECD2100CCC029 /* Farm_FinderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm_FinderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B3DAB121278ED14800CCC029 /* FarmEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmEntry.swift; sourceTree = "<group>"; };
+		B3DAB123278ED29200CCC029 /* FarmPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmPage.swift; sourceTree = "<group>"; };
+		B3DAB125278ED5BD00CCC029 /* FarmEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmEntryView.swift; sourceTree = "<group>"; };
+		B3DAB129278EDEBF00CCC029 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		B3DAB12B278EE1FE00CCC029 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +84,8 @@
 		B3DAB0EB278ECD1600CCC029 = {
 			isa = PBXGroup;
 			children = (
+				B3DAB12B278EE1FE00CCC029 /* LocationManager.swift */,
+				B3DAB129278EDEBF00CCC029 /* MapView.swift */,
 				B3DAB0F6278ECD1700CCC029 /* Farm-Finder */,
 				B3DAB107278ECD2100CCC029 /* Farm-FinderTests */,
 				B3DAB111278ECD2100CCC029 /* Farm-FinderUITests */,
@@ -96,8 +108,11 @@
 			children = (
 				B3DAB0F7278ECD1700CCC029 /* Farm_FinderApp.swift */,
 				B3DAB0F9278ECD1700CCC029 /* ContentView.swift */,
+				B3DAB125278ED5BD00CCC029 /* FarmEntryView.swift */,
+				B3DAB123278ED29200CCC029 /* FarmPage.swift */,
 				B3DAB0FB278ECD1F00CCC029 /* Assets.xcassets */,
 				B3DAB0FD278ECD1F00CCC029 /* Preview Content */,
+				B3DAB121278ED14800CCC029 /* FarmEntry.swift */,
 			);
 			path = "Farm-Finder";
 			sourceTree = "<group>";
@@ -257,7 +272,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3DAB12A278EDEBF00CCC029 /* MapView.swift in Sources */,
+				B3DAB124278ED29200CCC029 /* FarmPage.swift in Sources */,
+				B3DAB126278ED5BD00CCC029 /* FarmEntryView.swift in Sources */,
 				B3DAB0FA278ECD1700CCC029 /* ContentView.swift in Sources */,
+				B3DAB12C278EE1FE00CCC029 /* LocationManager.swift in Sources */,
+				B3DAB122278ED14800CCC029 /* FarmEntry.swift in Sources */,
 				B3DAB0F8278ECD1700CCC029 /* Farm_FinderApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
