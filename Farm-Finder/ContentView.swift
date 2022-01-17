@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+  
     var farm = FarmPage()
     var body: some View {
         NavigationView{
@@ -19,30 +19,42 @@ struct ContentView: View {
                 HStack{
                     Image(entry.image)
                         .resizable()
+                        .frame(width: 130, height: 130)
                         .scaledToFit()
-                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        
+                        
                         
                     VStack{
                 Text(entry.name)
                         Text(entry.content)
+                            .lineLimit(1)
                             .padding()
                     }
                     }
+                
                     /*var date : String {
                         let dateFormatter = dateFormatter()
                         dateFormatter.dateStyle = .medium
                         
                         return dateFormatter.string(from: entry.date)
                     }*/
+                
                 }
+               
             }
+                .padding()
+                .background(Color.blue)
+                .cornerRadius(20)
             
-            
-        }
-            
+           }
+    
+       }
+        
+        .navigationBarHidden(true)
+    }
+    
 }
-    }
-    }
 
 
 struct ContentView_Previews: PreviewProvider {

@@ -40,7 +40,9 @@ struct FarmEntryView : View {
              
              Text("About The Farm")
                  .font(.title2)
+             ScrollView{
              Text(entry.content)
+             }
             
             }
          .padding()

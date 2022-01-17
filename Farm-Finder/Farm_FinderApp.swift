@@ -11,7 +11,7 @@ import SwiftUI
 struct Farm_FinderApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            LoginView()
         }
     }
 }
