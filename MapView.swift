@@ -19,26 +19,29 @@ struct MapView: View {
     var body: some View {
         
         Map(coordinateRegion: $region)
+           
         
             .onAppear {
                 setRegion(coordinate)
-                
+                 
             }
+       
     }
     
     private func setRegion(_ coordinate: CLLocationCoordinate2D){
         
         region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
             
-        
-            
     }
 //    func setPinUsingMKPlacemark(location: CLLocationCoordinate2D) {
 //       let pin = MKPlacemark(coordinate: location)
-//       let coordinateRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 800, longitudinalMeters: 800)
-//      setRegion(coordinateRegion, animated: true)
-//            .addAnnotation(pin)
+//        var coordinateRegion = MKCoordinateRegion(center: pin.coordinate, latitudinalMeters: 800, longitudinalMeters: 800)
+//        coordinateRegion = coordinate
+//
+//        //MapMarker(coordinate: coordinate)
 //    }
+    
+    
     
 }
 

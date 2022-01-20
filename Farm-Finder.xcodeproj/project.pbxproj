@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B386CEBB279808C800936734 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B386CEBA279808C800936734 /* FirebaseAuth */; };
+		B386CEBD279808C800936734 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B386CEBC279808C800936734 /* FirebaseFirestore */; };
+		B386CEBF279808C800936734 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = B386CEBE279808C800936734 /* FirebaseFirestoreSwift-Beta */; };
+		B386CEC327982AF200936734 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B386CEC227982AF000936734 /* GoogleService-Info.plist */; };
 		B3DAB0F8278ECD1700CCC029 /* Farm_FinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB0F7278ECD1700CCC029 /* Farm_FinderApp.swift */; };
 		B3DAB0FA278ECD1700CCC029 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB0F9278ECD1700CCC029 /* ContentView.swift */; };
 		B3DAB0FC278ECD1F00CCC029 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3DAB0FB278ECD1F00CCC029 /* Assets.xcassets */; };
@@ -40,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B386CEC227982AF000936734 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B3DAB0F4278ECD1700CCC029 /* Farm-Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Farm-Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DAB0F7278ECD1700CCC029 /* Farm_FinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm_FinderApp.swift; sourceTree = "<group>"; };
 		B3DAB0F9278ECD1700CCC029 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,6 +68,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B386CEBF279808C800936734 /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				B386CEBB279808C800936734 /* FirebaseAuth in Frameworks */,
+				B386CEBD279808C800936734 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +94,7 @@
 		B3DAB0EB278ECD1600CCC029 = {
 			isa = PBXGroup;
 			children = (
+				B386CEC227982AF000936734 /* GoogleService-Info.plist */,
 				B3DAB12B278EE1FE00CCC029 /* LocationManager.swift */,
 				B3DAB129278EDEBF00CCC029 /* MapView.swift */,
 				B3DAB0F6278ECD1700CCC029 /* Farm-Finder */,
@@ -161,6 +170,11 @@
 			dependencies = (
 			);
 			name = "Farm-Finder";
+			packageProductDependencies = (
+				B386CEBA279808C800936734 /* FirebaseAuth */,
+				B386CEBC279808C800936734 /* FirebaseFirestore */,
+				B386CEBE279808C800936734 /* FirebaseFirestoreSwift-Beta */,
+			);
 			productName = "Farm-Finder";
 			productReference = B3DAB0F4278ECD1700CCC029 /* Farm-Finder.app */;
 			productType = "com.apple.product-type.application";
@@ -233,6 +247,9 @@
 				Base,
 			);
 			mainGroup = B3DAB0EB278ECD1600CCC029;
+			packageReferences = (
+				B386CEB9279808C400936734 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = B3DAB0F5278ECD1700CCC029 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -251,6 +268,7 @@
 			files = (
 				B3DAB0FF278ECD1F00CCC029 /* Preview Assets.xcassets in Resources */,
 				B3DAB0FC278ECD1F00CCC029 /* Assets.xcassets in Resources */,
+				B386CEC327982AF200936734 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +474,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.exemple.Farm-Finder";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Farm-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -485,7 +503,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.exemple.Farm-Finder";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Farm-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -609,6 +627,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B386CEB9279808C400936734 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B386CEBA279808C800936734 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B386CEB9279808C400936734 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		B386CEBC279808C800936734 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B386CEB9279808C400936734 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		B386CEBE279808C800936734 /* FirebaseFirestoreSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B386CEB9279808C400936734 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFirestoreSwift-Beta";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B3DAB0EC278ECD1600CCC029 /* Project object */;
 }

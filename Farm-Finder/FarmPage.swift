@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class FarmPage {
+class FarmPage : Identifiable {
   var entries = [FarmEntry]()
     
     init(){
