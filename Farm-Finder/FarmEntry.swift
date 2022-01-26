@@ -7,21 +7,25 @@
 
 import Foundation
 import CoreLocation
+import FirebaseFirestoreSwift
+import UIKit
+import SwiftUI
 
 
-struct FarmEntry : Identifiable {
-    var id = UUID()
+struct FarmEntry : Identifiable, Codable {
+    @DocumentID var id : String?
     var name : String
     var content: String
     var image : String
     var date : Date = Date()
-    var location : String
+    var location : String?
     var latitude: Double
     var longitude: Double
-    
     
     
     var coordinate : CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 }
+
+

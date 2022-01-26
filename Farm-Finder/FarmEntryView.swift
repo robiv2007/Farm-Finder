@@ -11,6 +11,7 @@ struct FarmEntryView : View {
     var entry: FarmEntry
    
     var body: some View {
+        ScrollView {
         VStack{
             MapView(coordinate: entry.coordinate)
                 .ignoresSafeArea(edges: .top)
@@ -30,7 +31,7 @@ struct FarmEntryView : View {
              Text(entry.name)
                     .font(.title)
                 HStack {
-                    Text(entry.location).font(.subheadline)
+                    Text(entry.location ?? "Handen").font(.subheadline)
                     Spacer()
                     Text("Haninge")
                 }
@@ -40,9 +41,9 @@ struct FarmEntryView : View {
              
              Text("About The Farm")
                  .font(.title2)
-             ScrollView{
+            // ScrollView{
              Text(entry.content)
-             }
+            // }
             
             }
          .padding()
@@ -50,6 +51,7 @@ struct FarmEntryView : View {
             Spacer()
             
             
+        }
         }
        
     }

@@ -52,11 +52,11 @@ struct LoginView: View {
     
     @State var email  = ""
     @State var password  = ""
+    @State var visible = false
     @EnvironmentObject var viewModel : AppViewModel
     
     var body: some View {
         
-                
             NavigationView{
         
        VStack{
@@ -77,20 +77,45 @@ struct LoginView: View {
                        
                    }
                 Text("Or Login with your farm")
+               .frame(width: 200, height: 20, alignment: .center)
                     .foregroundColor(Color.white)
-                    .background(Color(
-                    .secondarySystemBackground))
-                        
+                    .background(Color.green)
+                    .cornerRadius(20)
+                    .padding()
+           
                 TextField("Email Adress",text: $email)
                .disableAutocorrection(true)
                .autocapitalization(.none)
                         .padding()
                         .background(Color(.secondarySystemBackground))
-                    SecureField("Password", text: $password)
+           
+           HStack(spacing: 15){
+               
+           if self.visible {
+           TextField("Password", text: $password)
                .disableAutocorrection(true)
                .autocapitalization(.none)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
+
+           }
+           else {
+               SecureField("Password", text: $password)
+                   .disableAutocorrection(true)
+                   .autocapitalization(.none)
+                    
+           }
+               Button(action: {
+                   self.visible.toggle()
+               },label: {
+                   
+                   Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
+                       .foregroundColor(Color.primary)
+                    
+               })
+            
+           }
+           .padding()
+           .background(Color(.secondarySystemBackground))
+
            NavigationLink(destination: EditProfileView() ,isActive: $viewModel.anotherView){EmptyView()
                
            }
@@ -119,16 +144,15 @@ struct LoginView: View {
 struct SignUpView: View {
     
     @EnvironmentObject var viewModel : AppViewModel
-    @State private var isShowingAnotherView = false
     @State var email  = ""
     @State var password  = ""
+    @State var verifyPassword = ""
     @State var visible = false
     var body: some View {
         
             VStack{
         Image("logo")
             .resizable()
-           // .scaledToFit()
             .position(x: 225, y: 50)
             .frame(width: 450, height: 300)
             
@@ -137,41 +161,71 @@ struct SignUpView: View {
                     .autocapitalization(.none)
                         .padding()
                         .background(Color(.secondarySystemBackground))
-                HStack{
-                    
+                HStack(spacing: 15){
                     
                 if self.visible {
                 TextField("Password", text: $password)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
                 }
                 else {
                     SecureField("Password", text: $password)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
-                            .padding()
-                            .background(Color(.secondarySystemBackground))
                 }
-                       
-                
                     Button(action: {
                         self.visible.toggle()
                     },label: {
                         
                         Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
                             .foregroundColor(Color.primary)
-                           
+                        
                     })
-                    
+          
                 }
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                
+                HStack(spacing: 15){
+                    
+                if self.visible {
+                TextField("Retype Password", text: $verifyPassword)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                }
+                else {
+                    SecureField("Retype Password", text: $verifyPassword)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                }
+                    Button(action: {
+                        self.visible.toggle()
+                    },label: {
+                        
+                        Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
+                            .foregroundColor(Color.primary)
+                        
+                    })
+          
+                }
+                .padding()
+                .background(Color(.secondarySystemBackground))
                 
             
                 NavigationLink(destination: LoginView() ,isActive: $viewModel.anotherView){EmptyView()
                 }
                     Button(action: {
-                        viewModel.signUp(email: email, password: password)
+                        
+                        if password == verifyPassword {
+                            viewModel.signUp(email: email, password: password)
+                        }
+                        else{
+                            visible = true
+                            password = "Type missmatch"
+                           verifyPassword = "Type missmatch"
+                            
+                        }
+                        
   
                     }, label: {
                         Text("Create Account")
