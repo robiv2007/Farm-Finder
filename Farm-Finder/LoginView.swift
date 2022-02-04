@@ -13,6 +13,7 @@ class AppViewModel: ObservableObject {
     let auth = Auth.auth()
     @Published var signedIn = false
     @Published var anotherView = false
+    @Published var secondView = false
     var isSignedIn: Bool {
         return auth.currentUser != nil
     }
@@ -41,7 +42,7 @@ class AppViewModel: ObservableObject {
             
             self?.signedIn = false
             if self?.signedIn == false {
-                self?.anotherView = true
+                self?.secondView = true
             }
             
         }
@@ -55,6 +56,7 @@ struct LoginView: View {
     @State var visible = false
     @EnvironmentObject var viewModel : AppViewModel
     
+    
     var body: some View {
         
             NavigationView{
@@ -66,7 +68,7 @@ struct LoginView: View {
             .frame(width: 350, height: 200)
             .lineLimit(100)
             
-                NavigationLink(destination: ContentView())
+           NavigationLink(destination: ContentView())
                    {
                            Text("Browse the farms")
                               .foregroundColor(Color.white)
@@ -74,7 +76,6 @@ struct LoginView: View {
                               .background(Color.blue)
                               .cornerRadius(25)
                               .padding()
-                       
                    }
                 Text("Or Login with your farm")
                .frame(width: 200, height: 20, alignment: .center)
@@ -117,8 +118,7 @@ struct LoginView: View {
            .background(Color(.secondarySystemBackground))
 
            NavigationLink(destination: EditProfileView() ,isActive: $viewModel.anotherView){EmptyView()
-               
-           }
+               }
                     Button(action: {
                 
                         viewModel.signIn(email: email, password: password)

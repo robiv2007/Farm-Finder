@@ -9,24 +9,42 @@ import SwiftUI
 
 struct FarmEntryView : View {
     var entry: FarmEntry
+    @Binding var downloadImage : UIImage?
    
     var body: some View {
         ScrollView {
         VStack{
             MapView(coordinate: entry.coordinate)
                 .ignoresSafeArea(edges: .top)
-                .frame(height: 300)
+                .frame(height: 400)
             
-            Image(entry.image)
-                .resizable()
-                .frame(width: 300, height: 300, alignment: .center)
-                .clipShape(Circle())
-                .overlay {
-                    Circle().stroke(.white,lineWidth: 4)
-                }
-                .shadow(radius: 7)
-                .offset(y: -130)
-                .padding(.bottom, -130)
+            AsyncImage(url: URL(string: entry.image)){image in
+                image
+                    .resizable()
+                    .frame(width: 300, height: 300, alignment: .center)
+                    .scaledToFit()
+                    .clipShape(Circle())
+                    .overlay {
+                            Circle().stroke(.white,lineWidth: 4)
+                             }
+                    .shadow(radius: 7)
+                    .offset(y: -130)
+                    .padding(.bottom, -130)
+            }  placeholder: {
+                //ProgressView()
+                Image(systemName: "photo")
+                    .resizable()
+                    .frame(width: 300, height: 300, alignment: .center)
+                    .scaledToFit()
+                    .clipShape(Circle())
+                    .overlay {
+                        Circle().stroke(.white,lineWidth: 4)
+                    }
+                    .shadow(radius: 7)
+                    .offset(y: -130)
+                    .padding(.bottom, -130)
+            }
+
          VStack(alignment: .leading) {
              Text(entry.name)
                     .font(.title)
@@ -41,20 +59,16 @@ struct FarmEntryView : View {
              
              Text("About The Farm")
                  .font(.title2)
-            // ScrollView{
+         
              Text(entry.content)
-            // }
-            
+ 
             }
          .padding()
             
             Spacer()
             
             
+           }
         }
-        }
-       
     }
-    
-    
 }
