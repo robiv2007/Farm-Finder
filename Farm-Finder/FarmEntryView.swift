@@ -9,12 +9,11 @@ import SwiftUI
 
 struct FarmEntryView : View {
     var entry: FarmEntry
-    @Binding var downloadImage : UIImage?
-   
+ 
     var body: some View {
         ScrollView {
         VStack{
-            MapView(coordinate: entry.coordinate)
+            MapView(coordinate: entry.coordinate, entry: entry)
                 .ignoresSafeArea(edges: .top)
                 .frame(height: 400)
             

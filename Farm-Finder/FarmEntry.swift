@@ -14,6 +14,7 @@ import SwiftUI
 
 struct FarmEntry : Identifiable, Codable {
     @DocumentID var id : String?
+    var owner : String? = nil
     var name : String
     var content: String
     var image : String

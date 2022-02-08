@@ -14,6 +14,7 @@ class AppViewModel: ObservableObject {
     @Published var signedIn = false
     @Published var anotherView = false
     @Published var secondView = false
+
     var isSignedIn: Bool {
         return auth.currentUser != nil
     }
@@ -55,7 +56,7 @@ struct LoginView: View {
     @State var password  = ""
     @State var visible = false
     @EnvironmentObject var viewModel : AppViewModel
-    
+    //var entry : FarmEntry
     
     var body: some View {
         
@@ -117,7 +118,7 @@ struct LoginView: View {
            .padding()
            .background(Color(.secondarySystemBackground))
 
-           NavigationLink(destination: EditProfileView() ,isActive: $viewModel.anotherView){EmptyView()
+           NavigationLink(destination: EditProfileView(),isActive: $viewModel.anotherView){EmptyView()
                }
                     Button(action: {
                 
