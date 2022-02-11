@@ -8,6 +8,7 @@
 import SwiftUI
 import Firebase
 import FirebaseStorage
+import MapKit
 
 struct ContentView: View {
     var db = Firestore.firestore()
@@ -37,6 +38,7 @@ struct ContentView: View {
                         }
                         VStack{
                             Text(entry.name)
+                                .font(.headline)
                             
                             Text(entry.content)
                                 .lineLimit(1)
@@ -45,8 +47,8 @@ struct ContentView: View {
                     }
                 }
             }
-            .background(Color.blue)
-            .cornerRadius(20)
+            .background(Color.cyan)
+            .cornerRadius(10)
         }
         .onAppear(){
             listenToFirestore()
@@ -100,8 +102,11 @@ struct EditProfileView : View {
     @State private var imageURL = URL(string:"")
     @State private var showingSheet = false
     @State var entry: FarmEntry? = nil
+    @ObservedObject private var locationManager = LocationManager()
     var body: some View {
-        
+    let coordinate = locationManager.location?.coordinate ?? CLLocationCoordinate2D()
+    
+       
         VStack{
             Button(action: {
                 self.showActionSheet = true
@@ -164,31 +169,53 @@ struct EditProfileView : View {
             Text("Add a picture ")
             if let entry = entry {
                 if entry.name == "" {
-                    TextField(nameFieldText, text: $nameFieldText)
+                    TextEditor(text: $nameFieldText)
+                    //TextField(nameFieldText, text: $nameFieldText)
                         .font(.largeTitle)
                 } else {
+                   
                     TextField("\(entry.name)", text: $nameFieldText)
                         .font(.largeTitle)
+                
                 }
-//            TextField( nameFieldText == entry.name ? entry.name : nameFieldText, text: $nameFieldText)
             }
             
-            //            if entry.name == "" {
-            //            TextField("Farm's name", text: $nameFieldText)
-            //                .font(.title)
-            //                .padding()
-            //            }
-            //            else {
-            //
-            //                TextField("\(entry.name)",text: $nameFieldText)
-            //            }
             Button("Save location on map") {
                 showingSheet.toggle()
             }
             
             .sheet(isPresented: $showingSheet){
                 if let entry = entry {
-                    MapView(coordinate: entry.coordinate, entry: entry)
+                    MapView(coordinate: coordinate, entry: entry)
+                   
+                    Text("\(coordinate.latitude), \(coordinate.longitude)")
+                        .foregroundColor(.white)
+                        .background(.green)
+                        .padding(10)
+                    Button(action: {
+                        self.entry?.latitude = coordinate.latitude
+                        self.entry?.longitude = coordinate.longitude
+                        showingSheet = false
+                    }, label: {
+                        Text("Save Location")
+                            .font(.headline)
+                            .frame(width: 200, height: 60)
+                            .foregroundColor(.white)
+                            .background(.red)
+                            .cornerRadius(25)
+                            
+                            
+//                        Image(systemName: "plus.app")
+//                            .frame(width: 50, height: 50, alignment: .center)
+//                            .font(.title)
+                    })
+                    Button(action: {
+                        showingSheet = false
+                    }, label: {
+                        Image(systemName: "x.circle")
+                            .frame(width: 50, height: 50, alignment: .center)
+                            .font(.title)
+                    })
                 }
                 
             }
@@ -197,13 +224,15 @@ struct EditProfileView : View {
             ScrollView{
             if let entry = entry {
                 if entry.content == "" {
-                    TextField(descriptionText, text: $descriptionText)
-                        .font(.body)
-                        .frame(width: 400, height: 250, alignment: .topLeading)
+                    TextEditor(text: $descriptionText)
+//                    TextField(descriptionText, text: $descriptionText)
+                       .font(.body)
+                       .frame(width: 400, height: 250, alignment: .topLeading)
                 } else {
                     TextField("\(entry.content)", text: $descriptionText)
                         .font(.body)
                         .frame(width: 400, height: 250, alignment: .topLeading)
+                        .lineLimit(7)
                 }
 
             }
@@ -212,10 +241,12 @@ struct EditProfileView : View {
             Button(action: {
                 if let image = self.uploadImage {
                     uploadTheImage(image: image)
-                    
+                    secondView = true
                     
                 }else{
                     print("error in upload")
+                    saveToFirestore()
+                    secondView = true
                 }
                 
             }, label: {
@@ -226,16 +257,18 @@ struct EditProfileView : View {
                     .cornerRadius(25)
             })
             Spacer()
-            NavigationLink(destination: ContentView() ,isActive: $viewModel.secondView){EmptyView()
-            }
+           NavigationLink(destination: ContentView() ,isActive: $secondView) {EmptyView()}
+
         }
         .onAppear(){
-            
             guard let uid = Auth.auth().currentUser?.uid else { return }
             print("THIS IS UID \(uid)")
+            self.entry = FarmEntry(owner: uid ,name: "", content: "", image: "", latitude: 0.0, longitude: 0.0)
             db.collection("farms").whereField("owner", isEqualTo: uid).getDocuments() {
                 snapshot, err in
-                guard let snapshot = snapshot else { return }
+                print("DB Collection")
+                guard let snapshot = snapshot else{ print("Snapshot")
+                    return }
                 
                 if let err = err {
                     print("Error to get documents \(err)")
@@ -247,11 +280,12 @@ struct EditProfileView : View {
                         switch result {
                         case.success(let item ) :
                             if let item = item {
+                                print("item")
                                 self.entry = item
                             } else {
                                 print("Document does not exist")
+                                
                             }
-                            
                         case.failure(let error) :
                             print("Error decoding item \(error)")
                         }
@@ -281,13 +315,14 @@ struct EditProfileView : View {
             }
             else {
                 print("ERROR IN UPLOAD IMAGE FUNC")
+                
             }
         }
     }
     func saveToFirestore() {
         print("save 1")
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let user = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? "", latitude: 59.11966, longitude: 18.11518)
+        let user = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? entry?.image as! String , latitude: entry?.latitude ?? 59.11966, longitude: entry?.longitude ?? 18.11518)
         
         do {
             _ = try db.collection("farms").document(uid).setData(from: user)
@@ -295,6 +330,8 @@ struct EditProfileView : View {
         } catch {
             print("Error in saving the data")
         }
+        
+       // db.collection("users").document(uid).updateData([user])
     }
 }
 //struct ContentView_Previews: PreviewProvider {

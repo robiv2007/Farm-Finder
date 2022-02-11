@@ -41,9 +41,9 @@ class AppViewModel: ObservableObject {
                 return
             }
             
-            self?.signedIn = false
-            if self?.signedIn == false {
-                self?.secondView = true
+            self?.signedIn = true
+            if self?.signedIn == true {
+                self?.anotherView = true
             }
             
         }
@@ -132,9 +132,8 @@ struct LoginView: View {
                                 .cornerRadius(25)
                                 .padding()
                     })
-        
+          
                NavigationLink("Register your farm",destination: SignUpView())
-               
                 Spacer()
            }
             .navigationTitle("Login Page")
@@ -219,6 +218,7 @@ struct SignUpView: View {
                         
                         if password == verifyPassword {
                             viewModel.signUp(email: email, password: password)
+                            
                         }
                         else{
                             visible = true

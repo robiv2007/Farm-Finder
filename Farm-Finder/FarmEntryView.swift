@@ -16,6 +16,23 @@ struct FarmEntryView : View {
             MapView(coordinate: entry.coordinate, entry: entry)
                 .ignoresSafeArea(edges: .top)
                 .frame(height: 400)
+                
+            
+            Button(action: {
+                let url = URL(string: "maps://?saddr=&daddr=\(entry.latitude),\(entry.longitude)")
+                if UIApplication.shared.canOpenURL(url!) {
+                      UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+                }
+            }, label: {
+                Text("DRIVE THERE")
+                    .foregroundColor(Color.white)
+                    .frame(width: 150, height: 30 )
+                    .background(Color.blue)
+                    .cornerRadius(25)
+                   
+            })
+                .position(x: 200, y: -380)
+                
             
             AsyncImage(url: URL(string: entry.image)){image in
                 image

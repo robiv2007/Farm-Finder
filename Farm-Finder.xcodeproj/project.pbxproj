@@ -47,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		B3584576279EAD9900332F2E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		B367F25727B31F60005EB3BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B386CEC227982AF000936734 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B3DAB0F4278ECD1700CCC029 /* Farm-Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Farm-Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DAB0F7278ECD1700CCC029 /* Farm_FinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Farm_FinderApp.swift; sourceTree = "<group>"; };
@@ -129,6 +130,7 @@
 		B3DAB0F6278ECD1700CCC029 /* Farm-Finder */ = {
 			isa = PBXGroup;
 			children = (
+				B367F25727B31F60005EB3BF /* Info.plist */,
 				B3DAB0F7278ECD1700CCC029 /* Farm_FinderApp.swift */,
 				B3DAB0F9278ECD1700CCC029 /* ContentView.swift */,
 				B3584576279EAD9900332F2E /* ImagePicker.swift */,
@@ -479,6 +481,9 @@
 				DEVELOPMENT_TEAM = JYXM9GFJ7A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Farm-Finder/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Ww need to know your location in order to save ";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is needed";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -508,6 +513,9 @@
 				DEVELOPMENT_TEAM = JYXM9GFJ7A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Farm-Finder/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Ww need to know your location in order to save ";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is needed";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
