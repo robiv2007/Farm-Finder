@@ -68,6 +68,13 @@ struct LoginView: View {
             .scaledToFit()
             .frame(width: 350, height: 200)
             .lineLimit(100)
+            .overlay {
+                Text("Farm Finder")
+                    .font(.largeTitle)
+                    .offset(y: 100)
+                    .foregroundColor(.blue)
+                   //.padding(.bottom, -100)
+            }
             
            NavigationLink(destination: ContentView())
                    {
@@ -149,7 +156,6 @@ struct SignUpView: View {
     @State var verifyPassword = ""
     @State var visible = false
     var body: some View {
-        
             VStack{
         Image("logo")
             .resizable()
@@ -238,9 +244,10 @@ struct SignUpView: View {
                     })
                     .padding()
                  Spacer()
-            }
+          }
         .navigationTitle("Register")
     }
+        
 }
 
 struct LoginView_Previews: PreviewProvider {

@@ -14,8 +14,6 @@ class LocationManager: NSObject , CLLocationManagerDelegate, ObservableObject {
     private let locationManager = CLLocationManager()
      @Published var location: CLLocation? = nil
     
-    
-    
     override init () {
         super.init()
         self.locationManager.delegate = self
@@ -25,13 +23,6 @@ class LocationManager: NSObject , CLLocationManagerDelegate, ObservableObject {
         self.locationManager.startUpdatingLocation()
         
     }
-    
-//    func askForPermission() {
-//        locationManager.requestWhenInUseAuthorization()
-//        locationManager.stopUpdatingLocation()
-//    }
-  
-   
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.last else {

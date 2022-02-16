@@ -18,7 +18,6 @@ struct FarmEntry : Identifiable, Codable {
     var name : String
     var content: String
     var image : String
-    var date : Date = Date()
     var location : String?
     var latitude: Double
     var longitude: Double

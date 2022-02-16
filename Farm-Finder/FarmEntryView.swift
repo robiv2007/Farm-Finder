@@ -17,7 +17,6 @@ struct FarmEntryView : View {
                 .ignoresSafeArea(edges: .top)
                 .frame(height: 400)
                 
-            
             Button(action: {
                 let url = URL(string: "maps://?saddr=&daddr=\(entry.latitude),\(entry.longitude)")
                 if UIApplication.shared.canOpenURL(url!) {
@@ -33,7 +32,6 @@ struct FarmEntryView : View {
             })
                 .position(x: 200, y: -380)
                 
-            
             AsyncImage(url: URL(string: entry.image)){image in
                 image
                     .resizable()
@@ -47,7 +45,6 @@ struct FarmEntryView : View {
                     .offset(y: -130)
                     .padding(.bottom, -130)
             }  placeholder: {
-                //ProgressView()
                 Image(systemName: "photo")
                     .resizable()
                     .frame(width: 300, height: 300, alignment: .center)
@@ -67,7 +64,7 @@ struct FarmEntryView : View {
                 HStack {
                     Text(entry.location ?? "Handen").font(.subheadline)
                     Spacer()
-                    Text("Haninge")
+                    //Text("Haninge")
                 }
                 .font(.subheadline)
                     .foregroundColor(.secondary)

@@ -47,8 +47,9 @@ struct ContentView: View {
                     }
                 }
             }
-            .background(Color.cyan)
-            .cornerRadius(10)
+            .background(Color.clear)
+            .padding(5)
+            .cornerRadius(20)
         }
         .onAppear(){
             listenToFirestore()
@@ -99,14 +100,24 @@ struct EditProfileView : View {
     @State var uploadImage : UIImage?
     @State var descriptionText : String = ""
     @State var nameFieldText : String = ""
+    @State var locationTextField : String = ""
     @State private var imageURL = URL(string:"")
     @State private var showingSheet = false
     @State var entry: FarmEntry? = nil
     @ObservedObject private var locationManager = LocationManager()
+    @State var tapped = false
+    var tap: some Gesture {
+        TapGesture(count: 1)
+            .onEnded { _ in self.tapped = !self.tapped
+                showingSheet = false
+            }
+    }
+    init() {
+        UITextView.appearance().backgroundColor = .clear
+    }
     var body: some View {
-    let coordinate = locationManager.location?.coordinate ?? CLLocationCoordinate2D()
-    
-       
+        let coordinate = locationManager.location?.coordinate ?? CLLocationCoordinate2D()
+        ScrollView {
         VStack{
             Button(action: {
                 self.showActionSheet = true
@@ -116,7 +127,7 @@ struct EditProfileView : View {
                 if uploadImage != nil {
                     Image(uiImage: uploadImage!)
                         .resizable()
-                        //.scaledToFit()
+                    //.scaledToFit()
                         .frame(width: 200, height: 200)
                         .clipShape(Circle())
                     
@@ -126,7 +137,7 @@ struct EditProfileView : View {
                             image
                                 .resizable()
                                 .frame(width: 200, height: 200)
-                                //.scaledToFit()
+                            //.scaledToFit()
                                 .clipShape(Circle())
                         }  placeholder: {
                             //ProgressView()
@@ -137,12 +148,11 @@ struct EditProfileView : View {
                                 .clipShape(Circle())
                         }
                     } else {
-                    Image(systemName: "photo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200, alignment: .trailing)
-                        .clipShape(Circle())
-                       
+                        Image(systemName: "photo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200, height: 200, alignment: .trailing)
+                            .clipShape(Circle())
                     }
                 }
                 
@@ -167,27 +177,37 @@ struct EditProfileView : View {
             }
             
             Text("Add a picture ")
-            if let entry = entry {
-                if entry.name == "" {
-                    TextEditor(text: $nameFieldText)
-                    //TextField(nameFieldText, text: $nameFieldText)
-                        .font(.largeTitle)
-                } else {
-                   
-                    TextField("\(entry.name)", text: $nameFieldText)
-                        .font(.largeTitle)
-                
-                }
-            }
             
+            if entry != nil {
+                TextField("Farm Name",text: $nameFieldText)
+                    .font(.largeTitle)
+                    .padding(5)
+                    .background(Color(.secondarySystemBackground))
+                    .cornerRadius(20)
+            }
+            if entry != nil {
+                TextField("City",text: $locationTextField)
+                    .font(.title)
+                    .padding(6)
+                    .background(Color(.secondarySystemBackground))
+                    .cornerRadius(20)
+            }
             Button("Save location on map") {
                 showingSheet.toggle()
             }
             
             .sheet(isPresented: $showingSheet){
                 if let entry = entry {
+                    
                     MapView(coordinate: coordinate, entry: entry)
-                   
+                        .overlay {
+                            Image(systemName: "x.circle.fill")
+                                .frame(width: 50, height: 50, alignment: .topLeading)
+                                .font(.title)
+                                .offset(x: -160, y: -300)
+                                .gesture(tap)
+                        }
+                    
                     Text("\(coordinate.latitude), \(coordinate.longitude)")
                         .foregroundColor(.white)
                         .background(.green)
@@ -203,41 +223,44 @@ struct EditProfileView : View {
                             .foregroundColor(.white)
                             .background(.red)
                             .cornerRadius(25)
-                            
-                            
-//                        Image(systemName: "plus.app")
-//                            .frame(width: 50, height: 50, alignment: .center)
-//                            .font(.title)
-                    })
-                    Button(action: {
-                        showingSheet = false
-                    }, label: {
-                        Image(systemName: "x.circle")
-                            .frame(width: 50, height: 50, alignment: .center)
-                            .font(.title)
                     })
                 }
-                
             }
             Text("Write down info about your farm")
-                .frame(width: 300, height: 20, alignment: .topLeading)
+                .frame(width: 300, height: 20, alignment: .center)
+            
             ScrollView{
-            if let entry = entry {
-                if entry.content == "" {
-                    TextEditor(text: $descriptionText)
-//                    TextField(descriptionText, text: $descriptionText)
-                       .font(.body)
-                       .frame(width: 400, height: 250, alignment: .topLeading)
-                } else {
-                    TextField("\(entry.content)", text: $descriptionText)
-                        .font(.body)
-                        .frame(width: 400, height: 250, alignment: .topLeading)
-                        .lineLimit(7)
+                if entry != nil {
+                    
+                    ZStack(alignment: .topLeading) {
+                        RoundedRectangle(cornerRadius: 20, style: .continuous)
+                            .fill(Color(UIColor.secondarySystemBackground))
+                        
+                        if descriptionText.isEmpty {
+                            Text("Write here")
+                                .foregroundColor(Color(UIColor.placeholderText))
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 12)
+                        } else {
+                            TextEditor(text: $descriptionText)
+                                .font(.title)
+                                .frame(width: 400, height: 250, alignment: .topLeading)
+                                .disableAutocorrection(true)
+                        }
+                        
+                        if entry?.content == "" {
+                            TextEditor(text: $descriptionText)
+                                .font(.title)
+                                .frame(width: 400, height: 250, alignment: .topLeading)
+                                .disableAutocorrection(true)
+                            
+                        }
+                    }
+                    
                 }
-
             }
-            }
-
+            
+            
             Button(action: {
                 if let image = self.uploadImage {
                     uploadTheImage(image: image)
@@ -257,13 +280,18 @@ struct EditProfileView : View {
                     .cornerRadius(25)
             })
             Spacer()
-           NavigationLink(destination: ContentView() ,isActive: $secondView) {EmptyView()}
-
+            NavigationLink(destination: ContentView() ,isActive: $secondView) {EmptyView()}
+            
+          }
+        .padding()
         }
         .onAppear(){
             guard let uid = Auth.auth().currentUser?.uid else { return }
+            
             print("THIS IS UID \(uid)")
-            self.entry = FarmEntry(owner: uid ,name: "", content: "", image: "", latitude: 0.0, longitude: 0.0)
+            self.entry = FarmEntry(owner: uid ,name: "", content: "", image: "",location: "", latitude: 0.0, longitude: 0.0)
+            
+            print("EMPTY ENTRY:NAME")
             db.collection("farms").whereField("owner", isEqualTo: uid).getDocuments() {
                 snapshot, err in
                 print("DB Collection")
@@ -282,6 +310,15 @@ struct EditProfileView : View {
                             if let item = item {
                                 print("item")
                                 self.entry = item
+                                if nameFieldText == "" {
+                                    changeValue()
+                                }
+                                if descriptionText == "" {
+                                    changeValue()
+                                }
+                                if locationTextField == "" {
+                                    changeValue()
+                                }
                             } else {
                                 print("Document does not exist")
                                 
@@ -291,11 +328,12 @@ struct EditProfileView : View {
                         }
                         
                     }
-    
+                    
                 }
             }
         }
     }
+    
     func uploadTheImage(image: UIImage) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let storageRef = Storage.storage().reference().child("user\(uid)")
@@ -319,10 +357,15 @@ struct EditProfileView : View {
             }
         }
     }
+    func changeValue(){
+        nameFieldText = entry?.name ?? "Farm Name"
+        descriptionText = entry?.content ?? "Description of your farm"
+        locationTextField = entry?.location ?? "City"
+    }
     func saveToFirestore() {
         print("save 1")
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let user = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? entry?.image as! String , latitude: entry?.latitude ?? 59.11966, longitude: entry?.longitude ?? 18.11518)
+        let user = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? entry?.image as! String,location: locationTextField , latitude: entry?.latitude ?? 59.11966, longitude: entry?.longitude ?? 18.11518)
         
         do {
             _ = try db.collection("farms").document(uid).setData(from: user)
@@ -331,7 +374,7 @@ struct EditProfileView : View {
             print("Error in saving the data")
         }
         
-       // db.collection("users").document(uid).updateData([user])
+        // db.collection("users").document(uid).updateData([user])
     }
 }
 //struct ContentView_Previews: PreviewProvider {
