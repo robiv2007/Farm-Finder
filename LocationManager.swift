@@ -12,7 +12,7 @@ import MapKit
 class LocationManager: NSObject , CLLocationManagerDelegate, ObservableObject {
     
     private let locationManager = CLLocationManager()
-     @Published var location: CLLocation? = nil
+    @Published var location: CLLocation? = nil
     
     override init () {
         super.init()
@@ -30,7 +30,7 @@ class LocationManager: NSObject , CLLocationManagerDelegate, ObservableObject {
         }
         self.location = location
     }
-  
+    
 }
 
 

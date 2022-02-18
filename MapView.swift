@@ -17,11 +17,11 @@ struct MapView: View {
     @State private var region = MKCoordinateRegion()
     var entry : FarmEntry
     
-   
+    
     var body: some View {
         
         let annotationItem: [FarmEntry] = [FarmEntry(name: entry.name, content: "", image: "", latitude: entry.latitude, longitude: entry.longitude)]
-    
+        
         Map(coordinateRegion: $region,
             showsUserLocation: true,
             annotationItems: annotationItem) {
@@ -30,18 +30,18 @@ struct MapView: View {
             
         }
         
-            
+        
         
             .onAppear {
                 setRegion(coordinate)
-             
+                
             }
     }
     
     private func setRegion(_ coordinate: CLLocationCoordinate2D){
-      
+        
         region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
-       
+        
         
     }
     

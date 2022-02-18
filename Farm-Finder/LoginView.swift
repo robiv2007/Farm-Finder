@@ -14,7 +14,7 @@ class AppViewModel: ObservableObject {
     @Published var signedIn = false
     @Published var anotherView = false
     @Published var secondView = false
-
+    
     var isSignedIn: Bool {
         return auth.currentUser != nil
     }
@@ -56,98 +56,98 @@ struct LoginView: View {
     @State var password  = ""
     @State var visible = false
     @EnvironmentObject var viewModel : AppViewModel
-    //var entry : FarmEntry
+    @State private var keyboardHeight: CGFloat = 140
     
     var body: some View {
         
-            NavigationView{
-        
-       VStack{
-                Image("logo")
-            .resizable()
-            .scaledToFit()
-            .frame(width: 350, height: 200)
-            .lineLimit(100)
-            .overlay {
-                Text("Farm Finder")
-                    .font(.largeTitle)
-                    .offset(y: 100)
-                    .foregroundColor(.blue)
-                   //.padding(.bottom, -100)
-            }
+        NavigationView{
             
-           NavigationLink(destination: ContentView())
-                   {
-                           Text("Browse the farms")
-                              .foregroundColor(Color.white)
-                              .frame(width: 300, height: 70 )
-                              .background(Color.blue)
-                              .cornerRadius(25)
-                              .padding()
-                   }
+            VStack{
+                Image("logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 350, height: 200)
+                    .lineLimit(100)
+                    .overlay {
+                        Text("Farm Finder")
+                            .font(.largeTitle)
+                            .offset(y: 100)
+                            .foregroundColor(.blue)
+                    }
+                
+                NavigationLink(destination: ContentView())
+                {
+                    Text("Browse the farms")
+                        .foregroundColor(Color.white)
+                        .frame(width: 300, height: 70)
+                        .font(.title2)
+                        .background(Color.blue)
+                        .cornerRadius(25)
+                        .padding()
+                }
                 Text("Or Login with your farm")
-               .frame(width: 200, height: 20, alignment: .center)
+                    .frame(width: 200, height: 20, alignment: .center)
                     .foregroundColor(Color.white)
                     .background(Color.green)
                     .cornerRadius(20)
                     .padding()
-           
-                TextField("Email Adress",text: $email)
-               .disableAutocorrection(true)
-               .autocapitalization(.none)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-           
-           HStack(spacing: 15){
-               
-           if self.visible {
-           TextField("Password", text: $password)
-               .disableAutocorrection(true)
-               .autocapitalization(.none)
-
-           }
-           else {
-               SecureField("Password", text: $password)
-                   .disableAutocorrection(true)
-                   .autocapitalization(.none)
-                    
-           }
-               Button(action: {
-                   self.visible.toggle()
-               },label: {
-                   
-                   Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
-                       .foregroundColor(Color.primary)
-                    
-               })
-            
-           }
-           .padding()
-           .background(Color(.secondarySystemBackground))
-
-           NavigationLink(destination: EditProfileView(),isActive: $viewModel.anotherView){EmptyView()
-               }
-                    Button(action: {
                 
-                        viewModel.signIn(email: email, password: password)
-
-                    }, label: {
-                            Text("Login")
-                                .foregroundColor(Color.white)
-                                .frame(width: 200, height:50)
-                                .background(Color.blue)
-                                .cornerRadius(25)
-                                .padding()
+                TextField("Email Adress",text: $email)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                    .padding()
+                    .background(Color(.secondarySystemBackground))
+                
+                HStack(spacing: 15){
+                    
+                    if self.visible {
+                        TextField("Password", text: $password)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
+                        
+                    }
+                    else {
+                        SecureField("Password", text: $password)
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
+                        
+                    }
+                    Button(action: {
+                        self.visible.toggle()
+                    },label: {
+                        
+                        Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
+                            .foregroundColor(Color.primary)
                     })
-          
-               NavigationLink("Register your farm",destination: SignUpView())
+                }
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                
+                NavigationLink(destination: EditProfileView(),isActive: $viewModel.anotherView){EmptyView()
+                }
+                Button(action: {
+                    
+                    viewModel.signIn(email: email, password: password)
+                    
+                }, label: {
+                    Text("Login")
+                        .foregroundColor(Color.white)
+                        .frame(width: 200, height:50)
+                        .background(Color.blue)
+                        .cornerRadius(25)
+                        .padding()
+                })
+                
+                NavigationLink("Register your farm",destination: SignUpView())
                 Spacer()
-           }
+            }
+            .padding()
+            .padding(.bottom,keyboardHeight)
             .navigationTitle("Login Page")
         }
     }
 }
-    
+
 struct SignUpView: View {
     
     @EnvironmentObject var viewModel : AppViewModel
@@ -155,99 +155,99 @@ struct SignUpView: View {
     @State var password  = ""
     @State var verifyPassword = ""
     @State var visible = false
+    @State private var keyboardHeight: CGFloat = 100
     var body: some View {
-            VStack{
-        Image("logo")
-            .resizable()
-            .position(x: 225, y: 50)
-            .frame(width: 450, height: 300)
+        VStack{
+            Image("logo")
+                .resizable()
+                .position(x: 225, y: 50)
+                .frame(width: 450, height: 300)
             
             TextField("Email Adress",text: $email)
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
-                        .padding()
-                        .background(Color(.secondarySystemBackground))
-                HStack(spacing: 15){
-                    
+                .disableAutocorrection(true)
+                .autocapitalization(.none)
+                .padding()
+                .background(Color(.secondarySystemBackground))
+            HStack(spacing: 15){
+                
                 if self.visible {
-                TextField("Password", text: $password)
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
+                    TextField("Password", text: $password)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
                 }
                 else {
                     SecureField("Password", text: $password)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
                 }
-                    Button(action: {
-                        self.visible.toggle()
-                    },label: {
-                        
-                        Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
-                            .foregroundColor(Color.primary)
-                        
-                    })
-          
-                }
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                
-                HStack(spacing: 15){
+                Button(action: {
+                    self.visible.toggle()
+                },label: {
                     
+                    Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
+                        .foregroundColor(Color.primary)
+                    
+                })
+            }
+            .padding()
+            .background(Color(.secondarySystemBackground))
+            
+            HStack(spacing: 15){
+                
                 if self.visible {
-                TextField("Retype Password", text: $verifyPassword)
-                    .disableAutocorrection(true)
-                    .autocapitalization(.none)
+                    TextField("Retype Password", text: $verifyPassword)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
                 }
                 else {
                     SecureField("Retype Password", text: $verifyPassword)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
                 }
-                    Button(action: {
-                        self.visible.toggle()
-                    },label: {
-                        
-                        Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
-                            .foregroundColor(Color.primary)
-                        
-                    })
-          
-                }
-                .padding()
-                .background(Color(.secondarySystemBackground))
-                
+                Button(action: {
+                    self.visible.toggle()
+                },label: {
+                    
+                    Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
+                        .foregroundColor(Color.primary)
+                    
+                })
+            }
+            .padding()
+            .background(Color(.secondarySystemBackground))
             
-                NavigationLink(destination: LoginView() ,isActive: $viewModel.anotherView){EmptyView()
+            
+            NavigationLink(destination: LoginView() ,isActive: $viewModel.anotherView){EmptyView()
+            }
+            Button(action: {
+                
+                if password == verifyPassword {
+                    viewModel.signUp(email: email, password: password)
+                    
                 }
-                    Button(action: {
-                        
-                        if password == verifyPassword {
-                            viewModel.signUp(email: email, password: password)
-                            
-                        }
-                        else{
-                            visible = true
-                            password = "Type missmatch"
-                           verifyPassword = "Type missmatch"
-                            
-                        }
-                        
-  
-                    }, label: {
-                        Text("Create Account")
-                            .foregroundColor(Color.white)
-                            .frame(width: 200, height:50)
-                            .background(Color.blue)
-                            .cornerRadius(25)
-                        
-                    })
-                    .padding()
-                 Spacer()
-          }
+                else{
+                    visible = true
+                    password = "Type missmatch"
+                    verifyPassword = "Type missmatch"
+                    
+                }
+            }, label: {
+                Text("Create Account")
+                    .foregroundColor(Color.white)
+                    .frame(width: 200, height:50)
+                    .background(Color.blue)
+                    .cornerRadius(25)
+                
+            })
+                .padding()
+            Spacer()
+        }
+        .padding()
+        .padding(.bottom,keyboardHeight)
         .navigationTitle("Register")
-    }
         
+        
+    }
 }
 
 struct LoginView_Previews: PreviewProvider {

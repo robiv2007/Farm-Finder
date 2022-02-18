@@ -29,7 +29,6 @@ struct ContentView: View {
                                 .scaledToFit()
                                 .clipShape(Circle())
                         }  placeholder: {
-                            //ProgressView()
                             Image(systemName: "photo")
                                 .resizable()
                                 .frame(width: 130, height: 130)
@@ -106,6 +105,7 @@ struct EditProfileView : View {
     @State var entry: FarmEntry? = nil
     @ObservedObject private var locationManager = LocationManager()
     @State var tapped = false
+    
     var tap: some Gesture {
         TapGesture(count: 1)
             .onEnded { _ in self.tapped = !self.tapped
@@ -118,172 +118,167 @@ struct EditProfileView : View {
     var body: some View {
         let coordinate = locationManager.location?.coordinate ?? CLLocationCoordinate2D()
         ScrollView {
-        VStack{
-            Button(action: {
-                self.showActionSheet = true
-                print("ADD PICTURE")
-            }
-                   , label: {
-                if uploadImage != nil {
-                    Image(uiImage: uploadImage!)
-                        .resizable()
-                    //.scaledToFit()
-                        .frame(width: 200, height: 200)
-                        .clipShape(Circle())
-                    
-                }else{
-                    if let entry = entry {
-                        AsyncImage(url: URL(string: entry.image)){image in
-                            image
-                                .resizable()
-                                .frame(width: 200, height: 200)
-                            //.scaledToFit()
-                                .clipShape(Circle())
-                        }  placeholder: {
-                            //ProgressView()
+            VStack{
+                Button(action: {
+                    self.showActionSheet = true
+                    print("ADD PICTURE")
+                }
+                       , label: {
+                    if uploadImage != nil {
+                        Image(uiImage: uploadImage!)
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                            .clipShape(Circle())
+                        
+                    }else{
+                        if let entry = entry {
+                            AsyncImage(url: URL(string: entry.image)){image in
+                                image
+                                    .resizable()
+                                    .frame(width: 200, height: 200)
+                                    .clipShape(Circle())
+                            }  placeholder: {
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .frame(width: 200, height: 200)
+                                    .scaledToFit()
+                                    .clipShape(Circle())
+                            }
+                        } else {
                             Image(systemName: "photo")
                                 .resizable()
-                                .frame(width: 200, height: 200)
                                 .scaledToFit()
+                                .frame(width: 200, height: 200, alignment: .trailing)
                                 .clipShape(Circle())
                         }
-                    } else {
-                        Image(systemName: "photo")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 200, height: 200, alignment: .trailing)
-                            .clipShape(Circle())
                     }
+                    
+                }).actionSheet(isPresented: $showActionSheet){
+                    ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
+                        
+                        .default(Text("Camera"),action: {
+                            self.showImagePicker = true
+                            self.sourceType = .camera
+                        }),
+                        .default(Text("Photo library"), action: {
+                            self.showImagePicker = true
+                            self.sourceType = .photoLibrary
+                        }),
+                        .cancel()
+                    ])
+                }
+                .sheet(isPresented: $showImagePicker){
+                    imagePicker(image: self.$uploadImage, showImagePicker:
+                                    self.$showImagePicker, sourceType:
+                                    self.sourceType)
                 }
                 
-            }).actionSheet(isPresented: $showActionSheet){
-                ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
-                    
-                    .default(Text("Camera"),action: {
-                        self.showImagePicker = true
-                        self.sourceType = .camera
-                    }),
-                    .default(Text("Photo library"), action: {
-                        self.showImagePicker = true
-                        self.sourceType = .photoLibrary
-                    }),
-                    .cancel()
-                ])
-            }
-            .sheet(isPresented: $showImagePicker){
-                imagePicker(image: self.$uploadImage, showImagePicker:
-                                self.$showImagePicker, sourceType:
-                                self.sourceType)
-            }
-            
-            Text("Add a picture ")
-            
-            if entry != nil {
-                TextField("Farm Name",text: $nameFieldText)
-                    .font(.largeTitle)
-                    .padding(5)
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(20)
-            }
-            if entry != nil {
-                TextField("City",text: $locationTextField)
-                    .font(.title)
-                    .padding(6)
-                    .background(Color(.secondarySystemBackground))
-                    .cornerRadius(20)
-            }
-            Button("Save location on map") {
-                showingSheet.toggle()
-            }
-            
-            .sheet(isPresented: $showingSheet){
-                if let entry = entry {
-                    
-                    MapView(coordinate: coordinate, entry: entry)
-                        .overlay {
-                            Image(systemName: "x.circle.fill")
-                                .frame(width: 50, height: 50, alignment: .topLeading)
-                                .font(.title)
-                                .offset(x: -160, y: -300)
-                                .gesture(tap)
-                        }
-                    
-                    Text("\(coordinate.latitude), \(coordinate.longitude)")
-                        .foregroundColor(.white)
-                        .background(.green)
-                        .padding(10)
-                    Button(action: {
-                        self.entry?.latitude = coordinate.latitude
-                        self.entry?.longitude = coordinate.longitude
-                        showingSheet = false
-                    }, label: {
-                        Text("Save Location")
-                            .font(.headline)
-                            .frame(width: 200, height: 60)
-                            .foregroundColor(.white)
-                            .background(.red)
-                            .cornerRadius(25)
-                    })
-                }
-            }
-            Text("Write down info about your farm")
-                .frame(width: 300, height: 20, alignment: .center)
-            
-            ScrollView{
+                Text("Add a picture ")
+                
                 if entry != nil {
-                    
-                    ZStack(alignment: .topLeading) {
-                        RoundedRectangle(cornerRadius: 20, style: .continuous)
-                            .fill(Color(UIColor.secondarySystemBackground))
-                        
-                        if descriptionText.isEmpty {
-                            Text("Write here")
-                                .foregroundColor(Color(UIColor.placeholderText))
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 12)
-                        } else {
-                            TextEditor(text: $descriptionText)
-                                .font(.title)
-                                .frame(width: 400, height: 250, alignment: .topLeading)
-                                .disableAutocorrection(true)
-                        }
-                        
-                        if entry?.content == "" {
-                            TextEditor(text: $descriptionText)
-                                .font(.title)
-                                .frame(width: 400, height: 250, alignment: .topLeading)
-                                .disableAutocorrection(true)
-                            
-                        }
-                    }
-                    
+                    TextField("Farm Name",text: $nameFieldText)
+                        .font(.largeTitle)
+                        .padding(5)
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(20)
                 }
-            }
-            
-            
-            Button(action: {
-                if let image = self.uploadImage {
-                    uploadTheImage(image: image)
-                    secondView = true
-                    
-                }else{
-                    print("error in upload")
-                    saveToFirestore()
-                    secondView = true
+                if entry != nil {
+                    TextField("City",text: $locationTextField)
+                        .font(.title)
+                        .padding(6)
+                        .background(Color(.secondarySystemBackground))
+                        .cornerRadius(20)
+                }
+                Button("Save location on map") {
+                    showingSheet.toggle()
                 }
                 
-            }, label: {
-                Text("Save")
-                    .foregroundColor(Color.white)
-                    .frame(width: 200, height:50)
-                    .background(Color.blue)
-                    .cornerRadius(25)
-            })
-            Spacer()
-            NavigationLink(destination: ContentView() ,isActive: $secondView) {EmptyView()}
-            
-          }
-        .padding()
+                .sheet(isPresented: $showingSheet){
+                    if let entry = entry {
+                        
+                        MapView(coordinate: coordinate, entry: entry)
+                            .overlay {
+                                Image(systemName: "x.circle.fill")
+                                    .frame(width: 50, height: 50, alignment: .topLeading)
+                                    .font(.title)
+                                    .offset(x: -160, y: -300)
+                                    .gesture(tap)
+                            }
+                        
+                        Text("\(coordinate.latitude), \(coordinate.longitude)")
+                            .foregroundColor(.white)
+                            .background(.green)
+                            .padding(10)
+                        Button(action: {
+                            self.entry?.latitude = coordinate.latitude
+                            self.entry?.longitude = coordinate.longitude
+                            showingSheet = false
+                        }, label: {
+                            Text("Save Location")
+                                .font(.headline)
+                                .frame(width: 200, height: 60)
+                                .foregroundColor(.white)
+                                .background(.red)
+                                .cornerRadius(25)
+                        })
+                    }
+                }
+                Text("Write down info about your farm")
+                    .frame(width: 300, height: 20, alignment: .center)
+                
+                ScrollView{
+                    if entry != nil {
+                        
+                        ZStack(alignment: .topLeading) {
+                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                .fill(Color(UIColor.secondarySystemBackground))
+                            
+                            if descriptionText.isEmpty {
+                                Text("Write here")
+                                    .foregroundColor(Color(UIColor.placeholderText))
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 12)
+                            } else {
+                                TextEditor(text: $descriptionText)
+                                    .font(.title)
+                                    .frame(width: 400, height: 250, alignment: .topLeading)
+                                    .disableAutocorrection(true)
+                            }
+                            
+                            if entry?.content == "" {
+                                TextEditor(text: $descriptionText)
+                                    .font(.title)
+                                    .frame(width: 400, height: 250, alignment: .topLeading)
+                                    .disableAutocorrection(true)
+                                
+                            }
+                        }
+                    }
+                }
+                
+                Button(action: {
+                    if let image = self.uploadImage {
+                        uploadTheImage(image: image)
+                        secondView = true
+                        
+                    }else{
+                        print("error in upload")
+                        saveToFirestore()
+                        secondView = true
+                    }
+                    
+                }, label: {
+                    Text("Save")
+                        .foregroundColor(Color.white)
+                        .frame(width: 200, height:50)
+                        .background(Color.blue)
+                        .cornerRadius(25)
+                })
+                Spacer()
+                NavigationLink(destination: ContentView() ,isActive: $secondView) {EmptyView()}
+                
+            }
+            .padding()
         }
         .onAppear(){
             guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -373,8 +368,6 @@ struct EditProfileView : View {
         } catch {
             print("Error in saving the data")
         }
-        
-        // db.collection("users").document(uid).updateData([user])
     }
 }
 //struct ContentView_Previews: PreviewProvider {
