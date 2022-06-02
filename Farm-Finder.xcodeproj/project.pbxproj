@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8901BC5B2847912B00A16E9F /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8901BC5A2847912B00A16E9F /* SignUpView.swift */; };
+		8901BC5E284791F700A16E9F /* SignUpOrSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8901BC5D284791F700A16E9F /* SignUpOrSignIn.swift */; };
+		89997C012848ADF500AC001C /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89997C002848ADF500AC001C /* ViewModel.swift */; };
+		89997C052848C2B500AC001C /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89997C042848C2B500AC001C /* EditView.swift */; };
 		B3584577279EAD9900332F2E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3584576279EAD9900332F2E /* ImagePicker.swift */; };
 		B358457A27A00CE600332F2E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B358457927A00CE600332F2E /* FirebaseStorage */; };
 		B386CEBB279808C800936734 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B386CEBA279808C800936734 /* FirebaseAuth */; };
@@ -25,7 +29,7 @@
 		B3DAB126278ED5BD00CCC029 /* FarmEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB125278ED5BD00CCC029 /* FarmEntryView.swift */; };
 		B3DAB12A278EDEBF00CCC029 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB129278EDEBF00CCC029 /* MapView.swift */; };
 		B3DAB12C278EE1FE00CCC029 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB12B278EE1FE00CCC029 /* LocationManager.swift */; };
-		B3DAB16B27919B6200CCC029 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB16A27919B6200CCC029 /* LoginView.swift */; };
+		B3DAB16B27919B6200CCC029 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB16A27919B6200CCC029 /* SignInView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +50,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8901BC5A2847912B00A16E9F /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		8901BC5D284791F700A16E9F /* SignUpOrSignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpOrSignIn.swift; sourceTree = "<group>"; };
+		89997C002848ADF500AC001C /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		89997C042848C2B500AC001C /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		B3584576279EAD9900332F2E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		B367F25727B31F60005EB3BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B386CEC227982AF000936734 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -64,7 +72,7 @@
 		B3DAB125278ED5BD00CCC029 /* FarmEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmEntryView.swift; sourceTree = "<group>"; };
 		B3DAB129278EDEBF00CCC029 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		B3DAB12B278EE1FE00CCC029 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		B3DAB16A27919B6200CCC029 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B3DAB16A27919B6200CCC029 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +104,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8901BC592847825A00A16E9F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B3DAB16A27919B6200CCC029 /* SignInView.swift */,
+				8901BC5A2847912B00A16E9F /* SignUpView.swift */,
+				B3DAB125278ED5BD00CCC029 /* FarmEntryView.swift */,
+				B3DAB0F9278ECD1700CCC029 /* ContentView.swift */,
+				89997C042848C2B500AC001C /* EditView.swift */,
+				B3DAB129278EDEBF00CCC029 /* MapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8901BC5C284791C700A16E9F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8901BC5D284791F700A16E9F /* SignUpOrSignIn.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		89997BFF2848ABA400AC001C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B3DAB12B278EE1FE00CCC029 /* LocationManager.swift */,
+				89997C002848ADF500AC001C /* ViewModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		B358457827A00CE400332F2E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,8 +145,9 @@
 			isa = PBXGroup;
 			children = (
 				B386CEC227982AF000936734 /* GoogleService-Info.plist */,
-				B3DAB12B278EE1FE00CCC029 /* LocationManager.swift */,
-				B3DAB129278EDEBF00CCC029 /* MapView.swift */,
+				89997BFF2848ABA400AC001C /* Model */,
+				8901BC5C284791C700A16E9F /* ViewModel */,
+				8901BC592847825A00A16E9F /* Views */,
 				B3DAB0F6278ECD1700CCC029 /* Farm-Finder */,
 				B3DAB107278ECD2100CCC029 /* Farm-FinderTests */,
 				B3DAB111278ECD2100CCC029 /* Farm-FinderUITests */,
@@ -132,14 +171,11 @@
 			children = (
 				B367F25727B31F60005EB3BF /* Info.plist */,
 				B3DAB0F7278ECD1700CCC029 /* Farm_FinderApp.swift */,
-				B3DAB0F9278ECD1700CCC029 /* ContentView.swift */,
 				B3584576279EAD9900332F2E /* ImagePicker.swift */,
-				B3DAB125278ED5BD00CCC029 /* FarmEntryView.swift */,
 				B3DAB123278ED29200CCC029 /* FarmPage.swift */,
+				B3DAB121278ED14800CCC029 /* FarmEntry.swift */,
 				B3DAB0FB278ECD1F00CCC029 /* Assets.xcassets */,
 				B3DAB0FD278ECD1F00CCC029 /* Preview Content */,
-				B3DAB121278ED14800CCC029 /* FarmEntry.swift */,
-				B3DAB16A27919B6200CCC029 /* LoginView.swift */,
 			);
 			path = "Farm-Finder";
 			sourceTree = "<group>";
@@ -311,13 +347,17 @@
 			files = (
 				B3DAB12A278EDEBF00CCC029 /* MapView.swift in Sources */,
 				B3DAB124278ED29200CCC029 /* FarmPage.swift in Sources */,
+				89997C012848ADF500AC001C /* ViewModel.swift in Sources */,
 				B3DAB126278ED5BD00CCC029 /* FarmEntryView.swift in Sources */,
 				B3584577279EAD9900332F2E /* ImagePicker.swift in Sources */,
 				B3DAB0FA278ECD1700CCC029 /* ContentView.swift in Sources */,
 				B3DAB12C278EE1FE00CCC029 /* LocationManager.swift in Sources */,
+				89997C052848C2B500AC001C /* EditView.swift in Sources */,
+				8901BC5B2847912B00A16E9F /* SignUpView.swift in Sources */,
 				B3DAB122278ED14800CCC029 /* FarmEntry.swift in Sources */,
-				B3DAB16B27919B6200CCC029 /* LoginView.swift in Sources */,
+				B3DAB16B27919B6200CCC029 /* SignInView.swift in Sources */,
 				B3DAB0F8278ECD1700CCC029 /* Farm_FinderApp.swift in Sources */,
+				8901BC5E284791F700A16E9F /* SignUpOrSignIn.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
