@@ -11,7 +11,7 @@ import Firebase
 import FirebaseStorage
 
 
-class ViewModel: ObservableObject {
+class Model: ObservableObject {
     var db = Firestore.firestore()
     
     
@@ -52,17 +52,19 @@ class ViewModel: ObservableObject {
         }
     }
     
-    func changeValue() {
-        @State var entry: FarmEntry? = nil
-        @State var descriptionText : String = ""
-        @State var nameFieldText : String = ""
-        @State var locationTextField : String = ""
-        
-        
-        nameFieldText = entry?.name ?? "Farm Name"
-        descriptionText = entry?.content ?? "Description of your farm"
-        locationTextField = entry?.location ?? "City"
-    }
+//    func changeValue() {
+//        var entry: FarmEntry? = nil
+//        var descriptionText : String = ""
+//        var nameFieldText : String = ""
+//        var locationTextField : String = ""
+//        
+//        
+//        nameFieldText = entry?.name ?? "Farm Name"
+//        descriptionText = entry?.content ?? "Description of your farm"
+//        locationTextField = entry?.location ?? "City"
+//    }
+//    
+    
     
     
     

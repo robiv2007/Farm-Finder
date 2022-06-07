@@ -15,10 +15,6 @@ struct ContentView: View {
     var auth = Auth.auth()
     @State var farms = [FarmEntry]()
     
-    
-    
-    
-    
     var body: some View {
         List(){
             ForEach(farms)
@@ -92,11 +88,7 @@ struct ContentView: View {
 }
 
 
-//    func changeValue(){
-//        nameFieldText = entry?.name ?? "Farm Name"
-//        descriptionText = entry?.content ?? "Description of your farm"
-//        locationTextField = entry?.location ?? "City"
-//    }
+   
     //    func saveToFirestore() {
     //        print("save 1")
     //        guard let uid = Auth.auth().currentUser?.uid else { return }

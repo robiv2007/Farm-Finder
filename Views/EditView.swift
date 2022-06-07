@@ -13,7 +13,7 @@ import MapKit
 
 struct EditProfileView : View {
     //@EnvironmentObject var viewModel : AppViewModel
-    @StateObject var viewModel = ViewModel()
+    @StateObject var model = Model()
     
     var db = Firestore.firestore()
     @State var showActionSheet = false
@@ -52,11 +52,12 @@ struct EditProfileView : View {
                 }
                        , label: {
                     if uploadImage != nil {
-                        Image(uiImage: uploadImage!)
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                            .clipShape(Circle())
-                        
+                        if let uploadImage = uploadImage {
+                            Image(uiImage: uploadImage)
+                                .resizable()
+                                .frame(width: 200, height: 200)
+                                .clipShape(Circle())
+                        }
                     }else{
                         if let entry = entry {
                             AsyncImage(url: URL(string: entry.image)){image in
@@ -80,9 +81,8 @@ struct EditProfileView : View {
                         }
                     }
                     
-                }).actionSheet(isPresented: $showActionSheet){
+                }).actionSheet(isPresented: $showActionSheet) {
                     ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
-                        
                         .default(Text("Camera"),action: {
                             self.showImagePicker = true
                             self.sourceType = .camera
@@ -94,122 +94,124 @@ struct EditProfileView : View {
                         .cancel()
                     ])
                 }
-                .sheet(isPresented: $showImagePicker){
-                    imagePicker(image: self.$uploadImage, showImagePicker:
-                                    self.$showImagePicker, sourceType:
-                                    self.sourceType)
-                }
-                
-                Text("Add a picture ")
-                
-                if entry != nil {
-                    TextField("Farm Name",text: $nameFieldText)
-                        .font(.largeTitle)
-                        .padding(5)
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(20)
-                }
-                if entry != nil {
-                    TextField("City",text: $locationTextField)
-                        .font(.title)
-                        .padding(6)
-                        .background(Color(.secondarySystemBackground))
-                        .cornerRadius(20)
-                }
-                Button("Save location on map") {
-                    showingSheet.toggle()
-                }
-                
-                .sheet(isPresented: $showingSheet){
-                    if let entry = entry {
-                        
-                        MapView(coordinate: coordinate, entry: entry)
-                            .overlay {
-                                Image(systemName: "x.circle.fill")
-                                    .frame(width: 50, height: 50, alignment: .topLeading)
-                                    .font(.title)
-                                    .offset(x: -160, y: -300)
-                                    .gesture(tap)
-                            }
-                        
-                        Text("\(coordinate.latitude), \(coordinate.longitude)")
+            }
+            .sheet(isPresented: $showImagePicker){
+                imagePicker(image: self.$uploadImage, showImagePicker:
+                                self.$showImagePicker, sourceType:
+                                self.sourceType)
+            }
+            
+            Text("Add a picture ")
+            
+            if entry != nil {
+                TextField("Farm Name",text: $nameFieldText)
+                    .font(.largeTitle)
+                    .padding(5)
+                    .background(Color(.secondarySystemBackground))
+                    .cornerRadius(20)
+            }
+            if entry != nil {
+                TextField("City",text: $locationTextField)
+                    .font(.title)
+                    .padding(6)
+                    .background(Color(.secondarySystemBackground))
+                    .cornerRadius(20)
+            }
+            Button("Save location on map") {
+                showingSheet.toggle()
+            }
+            
+            .sheet(isPresented: $showingSheet){
+                if let entry = entry {
+                    
+                    MapView(coordinate: coordinate, entry: entry)
+                        .overlay {
+                            Image(systemName: "x.circle.fill")
+                                .frame(width: 50, height: 50, alignment: .topLeading)
+                                .font(.title)
+                                .offset(x: -160, y: -300)
+                                .gesture(tap)
+                        }
+                    
+                    Text("\(coordinate.latitude), \(coordinate.longitude)")
+                        .foregroundColor(.white)
+                        .background(.green)
+                        .padding(10)
+                    Button(action: {
+                        self.entry?.latitude = coordinate.latitude
+                        self.entry?.longitude = coordinate.longitude
+                        showingSheet = false
+                    }, label: {
+                        Text("Save Location")
+                            .font(.headline)
+                            .frame(width: 200, height: 60)
                             .foregroundColor(.white)
-                            .background(.green)
-                            .padding(10)
-                        Button(action: {
-                            self.entry?.latitude = coordinate.latitude
-                            self.entry?.longitude = coordinate.longitude
-                            showingSheet = false
-                        }, label: {
-                            Text("Save Location")
-                                .font(.headline)
-                                .frame(width: 200, height: 60)
-                                .foregroundColor(.white)
-                                .background(.red)
-                                .cornerRadius(25)
-                        })
-                    }
+                            .background(.red)
+                            .cornerRadius(25)
+                    })
                 }
-                Text("Write down info about your farm")
-                    .frame(width: 300, height: 20, alignment: .center)
-                
-                ScrollView{
-                    if entry != nil {
+            }
+            Text("Write down info about your farm")
+                .frame(width: 300, height: 20, alignment: .center)
+            
+            ScrollView{
+                if entry != nil {
+                    
+                    ZStack(alignment: .topLeading) {
+                        RoundedRectangle(cornerRadius: 20, style: .continuous)
+                            .fill(Color(UIColor.secondarySystemBackground))
                         
-                        ZStack(alignment: .topLeading) {
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .fill(Color(UIColor.secondarySystemBackground))
+                        if descriptionText.isEmpty {
+                            Text("Write here")
+                                .foregroundColor(Color(UIColor.placeholderText))
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 12)
+                        } else {
+                            TextEditor(text: $descriptionText)
+                                .font(.title)
+                                .frame(width: 400, height: 250, alignment: .topLeading)
+                                .disableAutocorrection(true)
+                        }
+                        
+                        if entry?.content == "" {
+                            TextEditor(text: $descriptionText)
+                                .font(.title)
+                                .frame(width: 400, height: 250, alignment: .topLeading)
+                                .disableAutocorrection(true)
                             
-                            if descriptionText.isEmpty {
-                                Text("Write here")
-                                    .foregroundColor(Color(UIColor.placeholderText))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 12)
-                            } else {
-                                TextEditor(text: $descriptionText)
-                                    .font(.title)
-                                    .frame(width: 400, height: 250, alignment: .topLeading)
-                                    .disableAutocorrection(true)
-                            }
-                            
-                            if entry?.content == "" {
-                                TextEditor(text: $descriptionText)
-                                    .font(.title)
-                                    .frame(width: 400, height: 250, alignment: .topLeading)
-                                    .disableAutocorrection(true)
-                                
-                            }
                         }
                     }
                 }
-                
-                Button(action: {
-                    if let image = self.uploadImage {
-                        uploadImage(image: image)
-                        secondView = true
-                        
-                    }else{
-                        print("error in upload")
-                        guard let uid = Auth.auth().currentUser?.uid else { return }
-                        let farmEntry = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? entry?.image as! String,location: locationTextField , latitude: entry?.latitude ?? 59.11966, longitude: entry?.longitude ?? 18.11518)
-                        viewModel.saveToFirestore(farmEntry: farmEntry)
-                        secondView = true
-                    }
-                    
-                }, label: {
-                    Text("Save")
-                        .foregroundColor(Color.white)
-                        .frame(width: 200, height:50)
-                        .background(Color.blue)
-                        .cornerRadius(25)
-                })
-                Spacer()
-                NavigationLink(destination: ContentView() ,isActive: $secondView) {EmptyView()}
-                
             }
-            .padding()
+            
+            Button(action: {
+                if let image = self.uploadImage {
+                    uploadImage(image: image)
+                    secondView = true
+                    
+                }else{
+                    print("error in upload")
+                    guard let uid = Auth.auth().currentUser?.uid else { return }
+                    let farmEntry = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? entry?.image as! String,location: locationTextField , latitude: entry?.latitude ?? 59.11966, longitude: entry?.longitude ?? 18.11518)
+                    model.saveToFirestore(farmEntry: farmEntry)
+                    secondView = true
+                }
+                
+            }, label: {
+                Text("Save")
+                    .foregroundColor(Color.white)
+                    .frame(width: 200, height:50)
+                    .background(Color.blue)
+                    .cornerRadius(25)
+            })
+            Spacer()
+            NavigationLink(destination: ContentView() ,isActive: $secondView) {EmptyView()}
+            
         }
-        .onAppear(){
+        .padding()
+        
+        
+        .onAppear() {
             guard let uid = Auth.auth().currentUser?.uid else { return }
             
             print("THIS IS UID \(uid)")
@@ -235,13 +237,13 @@ struct EditProfileView : View {
                                 print("item")
                                 self.entry = item
                                 if nameFieldText == "" {
-                                    viewModel.changeValue()
+                                    changeValue()
                                 }
                                 if descriptionText == "" {
-                                    viewModel.changeValue()
+                                    changeValue()
                                 }
                                 if locationTextField == "" {
-                                    viewModel.changeValue()
+                                    changeValue()
                                 }
                             } else {
                                 print("Document does not exist")
@@ -255,9 +257,17 @@ struct EditProfileView : View {
                     
                 }
             }
+            func changeValue(){
+                nameFieldText = entry?.name ?? "Farm Name"
+                descriptionText = entry?.content ?? "Description of your farm"
+                locationTextField = entry?.location ?? "City"
+            }
+            
         }
+        
+        
+        
     }
-    
     func uploadImage(image: UIImage) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let storageRef = Storage.storage().reference().child("user\(uid)")
@@ -274,7 +284,7 @@ struct EditProfileView : View {
                     self.imageURL = url
                     guard let uid = Auth.auth().currentUser?.uid else { return }
                     let farmEntry = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? entry?.image as! String,location: locationTextField , latitude: entry?.latitude ?? 59.11966, longitude: entry?.longitude ?? 18.11518)
-                    viewModel.saveToFirestore(farmEntry: farmEntry)
+                    model.saveToFirestore(farmEntry: farmEntry)
                 }
             }
             else {
@@ -284,3 +294,295 @@ struct EditProfileView : View {
         }
     }
 }
+
+
+
+
+
+//                Button(action: {
+//                    self.showActionSheet = true
+//                    print("ADD PICTURE")
+//                }
+//                       , label: {
+//                    if uploadImage != nil {
+//                        Image(uiImage: uploadImage?)
+//                            .resizable()
+//                            .frame(width: 200, height: 200)
+//                            .clipShape(Circle())
+//
+//                    }else{
+//                        if let entry = entry {
+//                            AsyncImage(url: URL(string: entry.image)){image in
+//                                image
+//                                    .resizable()
+//                                    .frame(width: 200, height: 200)
+//                                    .clipShape(Circle())
+//                            }  placeholder: {
+//                                Image(systemName: "photo")
+//                                    .resizable()
+//                                    .frame(width: 200, height: 200)
+//                                    .scaledToFit()
+//                                    .clipShape(Circle())
+//                            }
+//                        } else {
+//                            Image(systemName: "photo")
+//                                .resizable()
+//                                .scaledToFit()
+//                                .frame(width: 200, height: 200, alignment: .trailing)
+//                                .clipShape(Circle())
+//                        }
+//                    }
+//
+//                }).actionSheet(isPresented: $showActionSheet) {
+//
+//                }
+//            }
+//            }
+//                    ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
+//
+//                        .default(Text("Camera"),action: {
+//                            self.showImagePicker = true
+//                            self.sourceType = .camera
+//                        }),
+//                        .default(Text("Photo library"), action: {
+//                            self.showImagePicker = true
+//                            self.sourceType = .photoLibrary
+//                        }),
+//                        .cancel()
+//                    ])
+//                }
+//                .sheet(isPresented: $showImagePicker){
+//                    imagePicker(image: self.$uploadImage, showImagePicker:
+//                                    self.$showImagePicker, sourceType:
+//                                    self.sourceType)
+//                }
+//
+//                Text("Add a picture ")
+//
+//                if entry != nil {
+//                    TextField("Farm Name",text: $nameFieldText)
+//                        .font(.largeTitle)
+//                        .padding(5)
+//                        .background(Color(.secondarySystemBackground))
+//                        .cornerRadius(20)
+//                }
+//                if entry != nil {
+//                    TextField("City",text: $locationTextField)
+//                        .font(.title)
+//                        .padding(6)
+//                        .background(Color(.secondarySystemBackground))
+//                        .cornerRadius(20)
+//                }
+//                Button("Save location on map") {
+//                    showingSheet.toggle()
+//                }
+//
+//                .sheet(isPresented: $showingSheet){
+//                    if let entry = entry {
+//
+//                        MapView(coordinate: coordinate, entry: entry)
+//                            .overlay {
+//                                Image(systemName: "x.circle.fill")
+//                                    .frame(width: 50, height: 50, alignment: .topLeading)
+//                                    .font(.title)
+//                                    .offset(x: -160, y: -300)
+//                                    .gesture(tap)
+//                            }
+//
+//                        Text("\(coordinate.latitude), \(coordinate.longitude)")
+//                            .foregroundColor(.white)
+//                            .background(.green)
+//                            .padding(10)
+//                        Button(action: {
+//                            self.entry?.latitude = coordinate.latitude
+//                            self.entry?.longitude = coordinate.longitude
+//                            showingSheet = false
+//                        }, label: {
+//                            Text("Save Location")
+//                                .font(.headline)
+//                                .frame(width: 200, height: 60)
+//                                .foregroundColor(.white)
+//                                .background(.red)
+//                                .cornerRadius(25)
+//                        })
+//                    }
+//                }
+//                Text("Write down info about your farm")
+//                    .frame(width: 300, height: 20, alignment: .center)
+//
+//                ScrollView{
+//                    if entry != nil {
+//
+//                        ZStack(alignment: .topLeading) {
+//                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+//                                .fill(Color(UIColor.secondarySystemBackground))
+//
+//                            if descriptionText.isEmpty {
+//                                Text("Write here")
+//                                    .foregroundColor(Color(UIColor.placeholderText))
+//                                    .padding(.horizontal, 8)
+//                                    .padding(.vertical, 12)
+//                            } else {
+//                                TextEditor(text: $descriptionText)
+//                                    .font(.title)
+//                                    .frame(width: 400, height: 250, alignment: .topLeading)
+//                                    .disableAutocorrection(true)
+//                            }
+//
+//                            if entry?.content == "" {
+//                                TextEditor(text: $descriptionText)
+//                                    .font(.title)
+//                                    .frame(width: 400, height: 250, alignment: .topLeading)
+//                                    .disableAutocorrection(true)
+//
+//                            }
+//                        }
+//                    }
+//                }
+//
+//                Button(action: {
+//                    if let image = self.uploadImage {
+//                        uploadImage(image: image)
+//                        secondView = true
+//
+//                    }else{
+//                        print("error in upload")
+//                        guard let uid = Auth.auth().currentUser?.uid else { return }
+//                        let farmEntry = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? entry?.image as! String,location: locationTextField , latitude: entry?.latitude ?? 59.11966, longitude: entry?.longitude ?? 18.11518)
+//                        model.saveToFirestore(farmEntry: farmEntry)
+//                        secondView = true
+//                    }
+//
+//                }, label: {
+//                    Text("Save")
+//                        .foregroundColor(Color.white)
+//                        .frame(width: 200, height:50)
+//                        .background(Color.blue)
+//                        .cornerRadius(25)
+//                })
+//                Spacer()
+//                NavigationLink(destination: ContentView() ,isActive: $secondView) {EmptyView()}
+//
+//            }
+//            .padding()
+
+
+
+//            .onAppear() {
+//
+//                guard let uid = Auth.auth().currentUser?.uid else { return }
+//
+//                print("THIS IS UID \(uid)")
+//                self.entry = FarmEntry(owner: uid ,name: "", content: "", image: "",location: "", latitude: 0.0, longitude: 0.0)
+//
+//                print("EMPTY ENTRY:NAME")
+//                db.collection("farms").whereField("owner", isEqualTo: uid).getDocuments() {
+//                    snapshot, err in
+//                    print("DB Collection")
+//                    guard let snapshot = snapshot else{ print("Snapshot")
+//                        return }
+//
+//                    if let err = err {
+//                        print("Error to get documents \(err)")
+//                    } else {
+//                        for document in snapshot.documents {
+//                            let result = Result {
+//                                try document.data(as: FarmEntry.self)
+//                            }
+//                            switch result {
+//                            case.success(let item ) :
+//                                if let item = item {
+//                                    print("item")
+//                                    self.entry = item
+//                                    if nameFieldText == "" {
+//                                        changeValue()
+//                                    }
+//                                    if descriptionText == "" {
+//                                        changeValue()
+//                                    }
+//                                    if locationTextField == "" {
+//                                        changeValue()
+//                                    }
+//                                } else {
+//                                    print("Document does not exist")
+//
+//                                }
+//                            case.failure(let error) :
+//                                print("Error decoding item \(error)")
+//                            }
+//
+//                        }
+//
+//                    }
+//                }
+
+
+
+
+
+
+//        func uploadImage(image: UIImage) {
+//            guard let uid = Auth.auth().currentUser?.uid else { return }
+//            let storageRef = Storage.storage().reference().child("user\(uid)")
+//
+//            guard let imageData = image.jpegData(compressionQuality: 1) else { return }
+//
+//            let metaData = StorageMetadata()
+//            metaData.contentType = "image/jpg"
+//
+//            storageRef.putData(imageData, metadata: metaData) {
+//                metaData, error in
+//                if error == nil , metaData != nil {
+//                    storageRef.downloadURL {url, error in
+//                        self.imageURL = url
+//                        guard let uid = Auth.auth().currentUser?.uid else { return }
+//                        let farmEntry = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? entry?.image as! String,location: locationTextField , latitude: entry?.latitude ?? 59.11966, longitude: entry?.longitude ?? 18.11518)
+//                        model.saveToFirestore(farmEntry: farmEntry)
+//                    }
+//                }
+//                else {
+//                    print("ERROR IN UPLOAD IMAGE FUNC")
+//
+//                }
+//            }
+//        }
+
+//        func changeValue(){
+//            nameFieldText = entry?.name ?? "Farm Name"
+//            descriptionText = entry?.content ?? "Description of your farm"
+//            locationTextField = entry?.location ?? "City"
+//        }
+//        func isEqualTo() {
+//            guard let uid = Auth.auth().currentUser?.uid else { return }
+//
+//            print("THIS IS UID \(uid)")
+//            self.entry = FarmEntry(owner: uid ,name: "", content: "", image: "",location: "", latitude: 0.0, longitude: 0.0)
+//            db.collection("farms").whereField("owner", isEqualTo: uid).getDocuments() {
+//                snapshot, err in
+//                guard let snapshot = snapshot else {return}
+//                if let err = err {
+//                    print("Error to get documents \(err)")
+//                } else {
+//                    for document in snapshot.documents {
+//                        let result = Result {
+//                            try document.data(as: FarmEntry.self)
+//                        }
+//
+//                    }
+//
+//                }
+//
+//
+//            }
+//
+//        }
+
+
+
+
+
+//    }
+//
+//
+//
+//}
