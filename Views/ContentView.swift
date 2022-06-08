@@ -89,16 +89,4 @@ struct ContentView: View {
 
 
    
-    //    func saveToFirestore() {
-    //        print("save 1")
-    //        guard let uid = Auth.auth().currentUser?.uid else { return }
-    //        let user = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? entry?.image as! String,location: locationTextField , latitude: entry?.latitude ?? 59.11966, longitude: entry?.longitude ?? 18.11518)
-    //
-    //        do {
-    //            _ = try db.collection("farms").document(uid).setData(from: user)
-    //
-    //        } catch {
-    //            print("Error in saving the data")
-    //        }
-    //    }
-
+   

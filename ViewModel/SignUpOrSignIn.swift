@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseAuth
 
-class AppViewModel: ObservableObject {
+class SignUpOrSignIn: ObservableObject {
     
     let auth = Auth.auth()
     @Published var signedIn = false

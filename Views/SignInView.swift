@@ -8,53 +8,13 @@
 import SwiftUI
 import FirebaseAuth
 
-//class AppViewModel: ObservableObject {
-//    
-//    let auth = Auth.auth()
-//    @Published var signedIn = false
-//    @Published var isLoggedInView = false
-//    
-//    var isSignedIn: Bool {
-//        return auth.currentUser != nil
-//    }
-//    
-//    func signIn(email: String, password: String){
-//        
-//        auth.signIn(withEmail: email, password: password) {
-//            [weak self] result, error in
-//            guard result != nil, error == nil
-//            else {
-//                return
-//            }
-//            self?.signedIn = true
-//            if self?.signedIn == true{
-//                self?.isLoggedInView = true
-//            }
-//        }
-//    }
-//    
-//    func signUp(email: String, password: String){
-//        auth.createUser(withEmail: email, password: password) {
-//            [weak self] result, error in
-//            guard result != nil, error == nil else {
-//                return
-//            }
-//            
-//            self?.signedIn = true
-//            if self?.signedIn == true {
-//                self?.isLoggedInView = true
-//            }
-//            
-//        }
-//    }
-//}
 
 struct LoginView: View {
     
     @State var email  = ""
     @State var password  = ""
     @State var passWordTextIsVisible = false
-    @EnvironmentObject var viewModel : AppViewModel
+    @EnvironmentObject var viewModel : SignUpOrSignIn
     @State private var keyboardHeight: CGFloat = 140
     
     var body: some View {
@@ -122,7 +82,7 @@ struct LoginView: View {
                 .padding()
                 .background(Color(.secondarySystemBackground))
                 
-                NavigationLink(destination: EditProfileView(),isActive: $viewModel.isLoggedInView){EmptyView()
+                NavigationLink(destination: EditProfilePicture(),isActive: $viewModel.isLoggedInView){EmptyView()
                 }
                 Button(action: {
                     

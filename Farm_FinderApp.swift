@@ -15,11 +15,12 @@ struct Farm_FinderApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
-            let viewModel = AppViewModel()
+            let viewModel = SignUpOrSignIn()
+            let getUserFarm = GetFarm()
             
             LoginView()
                 .environmentObject(viewModel)
-            //EditProfileView()
+                .environmentObject(getUserFarm)
            
           
 
