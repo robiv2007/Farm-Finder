@@ -16,11 +16,11 @@ struct Farm_FinderApp: App {
     var body: some Scene {
         WindowGroup {
             let viewModel = SignUpOrSignIn()
-            let getUserFarm = GetFarm()
+            let getFarm = GetUserFarm()
             
             LoginView()
                 .environmentObject(viewModel)
-                .environmentObject(getUserFarm)
+                .environmentObject(getFarm)
            
           
 

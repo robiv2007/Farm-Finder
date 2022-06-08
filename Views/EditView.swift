@@ -12,7 +12,7 @@ import MapKit
 
 
 struct EditProfilePicture : View {
-    @EnvironmentObject var getUserFarm : GetFarm
+    @EnvironmentObject var getFarm : GetUserFarm
     @State var showActionSheet = false
     @State var showImagePicker = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
@@ -83,7 +83,7 @@ struct EditProfilePicture : View {
             EditDescription()
         }
         .onAppear() {
-            getUserFarm.getUserFarm()
+            getFarm.getFarm()
         }
         
     }
@@ -91,7 +91,7 @@ struct EditProfilePicture : View {
 
 struct EditFarmNameAndLocation: View {
     @ObservedObject private var locationManager = LocationManager()
-    @EnvironmentObject var getUserFarm : GetFarm
+    @EnvironmentObject var getFarm : GetUserFarm
     @StateObject var model = Model()
     
     @State var descriptionText : String = ""
@@ -111,7 +111,7 @@ struct EditFarmNameAndLocation: View {
     
     var body: some View {
         let coordinate = locationManager.location?.coordinate ?? CLLocationCoordinate2D()
-        if getUserFarm.entry != nil {
+        if getFarm.entry != nil {
             TextField("Farm Name",text: $nameFieldText)
                 .font(.largeTitle)
                 .padding(5)
@@ -120,7 +120,7 @@ struct EditFarmNameAndLocation: View {
                 .disableAutocorrection(true)
         }
         
-        if getUserFarm.entry != nil {
+        if getFarm.entry != nil {
             TextField("City",text: $locationTextField)
                 .font(.title)
                 .padding(6)
@@ -133,9 +133,9 @@ struct EditFarmNameAndLocation: View {
         }
         
         .sheet(isPresented: $showingSheet){
-            if let entry = getUserFarm.entry {
+            if getFarm.entry != nil {
                 
-                MapView(coordinate: coordinate, entry: getUserFarm.entry!)
+                MapView(coordinate: coordinate, entry: getFarm.entry!)
                     .overlay {
                         Image(systemName: "x.circle.fill")
                             .frame(width: 50, height: 50, alignment: .topLeading)
@@ -149,8 +149,8 @@ struct EditFarmNameAndLocation: View {
                     .background(.green)
                     .padding(10)
                 Button(action: {
-                    self.getUserFarm.entry?.latitude = coordinate.latitude
-                    self.getUserFarm.entry?.longitude = coordinate.longitude
+                    self.getFarm.entry?.latitude = coordinate.latitude
+                    self.getFarm.entry?.longitude = coordinate.longitude
                     showingSheet = false
                 }, label: {
                     Text("Save Location")
@@ -162,18 +162,21 @@ struct EditFarmNameAndLocation: View {
                 })
             }
         }
+        .onAppear() {
+           
+        }
         
     }
 
     func changeValueOfTextfields(){
         if nameFieldText == "" {
-            nameFieldText = getUserFarm.entry?.name ?? "Farm Name"
+            nameFieldText = getFarm.entry?.name ?? "Farm Name"
         }
         if descriptionText == "" {
-            descriptionText = getUserFarm.entry?.content ?? "Description of your farm"
+            descriptionText = getFarm.entry?.content ?? "Description of your farm"
         }
         if locationTextField == "" {
-            locationTextField = getUserFarm.entry?.location ?? "City"
+            locationTextField = getFarm.entry?.location ?? "City"
         }
         
     }
@@ -181,7 +184,7 @@ struct EditFarmNameAndLocation: View {
 
 struct EditDescription: View {
     @StateObject var model = Model()
-    @EnvironmentObject var getUserFarm : GetFarm
+    @EnvironmentObject var getFarm : GetUserFarm
     @State var descriptionText : String = ""
     @State var nameFieldText : String = ""
     @State var locationTextField : String = ""
@@ -194,7 +197,7 @@ struct EditDescription: View {
         Text("Write down info about your farm")
             .frame(width: 300, height: 20, alignment: .center)
         VStack{
-            if getUserFarm.entry != nil {
+            if getFarm.entry != nil {
                 
                 ZStack(alignment: .topLeading) {
                     RoundedRectangle(cornerRadius: 20, style: .continuous)
@@ -212,7 +215,7 @@ struct EditDescription: View {
                             .disableAutocorrection(true)
                     }
                     
-                    if getUserFarm.entry?.content != "" {
+                    if getFarm.entry?.content != "" {
                         TextEditor(text: $descriptionText)
                             .font(.title)
                             .frame(width: 400, height: 250, alignment: .topLeading)
@@ -229,8 +232,8 @@ struct EditDescription: View {
                 
             }else{
                 guard let uid = Auth.auth().currentUser?.uid else { return }
-                changeValueOfTextfields()
-                let farmEntry = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? getUserFarm.entry?.image as! String ,location: locationTextField , latitude: getUserFarm.entry?.latitude ?? 59.11966, longitude: getUserFarm.entry?.longitude ?? 18.11518)
+                let farmEntry = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? getFarm.entry?.image as! String ,location: locationTextField , latitude: getFarm.entry?.latitude ?? 59.11966, longitude: getFarm.entry?.longitude ?? 18.11518)
+                changeValueOfTextfields(farm: farmEntry)
                 model.saveToFirestore(farmEntry: farmEntry)
                 secondView = true
             }
@@ -263,8 +266,8 @@ struct EditDescription: View {
                 storageRef.downloadURL {url, error in
                     self.imageURL = url
                     guard let uid = Auth.auth().currentUser?.uid else { return }
-                    changeValueOfTextfields()
-                    let farmEntry = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? getUserFarm.entry?.image as! String,location: locationTextField , latitude: getUserFarm.entry?.latitude ?? 59.11966, longitude: getUserFarm.entry?.longitude ?? 18.11518)
+                    let farmEntry = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? getFarm.entry?.image as! String,location: locationTextField , latitude: getFarm.entry?.latitude ?? 59.11966, longitude: getFarm.entry?.longitude ?? 18.11518)
+                    changeValueOfTextfields(farm: farmEntry)
                     model.saveToFirestore(farmEntry: farmEntry)
                 }
             }
@@ -274,15 +277,15 @@ struct EditDescription: View {
             }
         }
     }
-    func changeValueOfTextfields(){
-        if nameFieldText == "" {
-            nameFieldText = getUserFarm.entry?.name ?? "Farm Name"
+    func changeValueOfTextfields(farm: FarmEntry){
+        if getFarm.entry?.name == "" {
+            nameFieldText = getFarm.entry?.name ?? "Farm Name"
         }
         if descriptionText == "" {
-            descriptionText = getUserFarm.entry?.content ?? "Description of your farm"
+            descriptionText = getFarm.entry?.content ?? "Description of your farm"
         }
         if locationTextField == "" {
-            locationTextField = getUserFarm.entry?.location ?? "City"
+            locationTextField = getFarm.entry?.location ?? "City"
         }
         
     }

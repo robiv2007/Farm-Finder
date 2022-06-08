@@ -10,13 +10,13 @@ import FirebaseAuth
 import Firebase
 
 
-class GetFarm: ObservableObject {
+class GetUserFarm: ObservableObject {
     var db = Firestore.firestore()
     @Published var entry: FarmEntry? = nil
    
     
     
-    func getUserFarm() {
+    func getFarm() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         self.entry = FarmEntry(owner: uid ,name: "", content: "", image: "",location: "", latitude: 0.0, longitude: 0.0)
