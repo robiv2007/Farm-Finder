@@ -92,7 +92,7 @@ struct EditProfilePicture : View {
 struct EditFarmNameAndLocation: View {
     @ObservedObject private var locationManager = LocationManager()
     @EnvironmentObject var getFarm : GetUserFarm
-    @StateObject var model = Model()
+    @StateObject var model = SaveFarm()
     
     @State var descriptionText : String = ""
     @State var nameFieldText : String = ""
@@ -183,7 +183,7 @@ struct EditFarmNameAndLocation: View {
 }
 
 struct EditDescription: View {
-    @StateObject var model = Model()
+    @StateObject var saveFarm = SaveFarm()
     @EnvironmentObject var getFarm : GetUserFarm
     @State var descriptionText : String = ""
     @State var nameFieldText : String = ""
@@ -234,7 +234,7 @@ struct EditDescription: View {
                 guard let uid = Auth.auth().currentUser?.uid else { return }
                 let farmEntry = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? getFarm.entry?.image as! String ,location: locationTextField , latitude: getFarm.entry?.latitude ?? 59.11966, longitude: getFarm.entry?.longitude ?? 18.11518)
                 changeValueOfTextfields(farm: farmEntry)
-                model.saveToFirestore(farmEntry: farmEntry)
+                saveFarm.saveToFirestore(farmEntry: farmEntry)
                 secondView = true
             }
             
@@ -268,7 +268,7 @@ struct EditDescription: View {
                     guard let uid = Auth.auth().currentUser?.uid else { return }
                     let farmEntry = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? getFarm.entry?.image as! String,location: locationTextField , latitude: getFarm.entry?.latitude ?? 59.11966, longitude: getFarm.entry?.longitude ?? 18.11518)
                     changeValueOfTextfields(farm: farmEntry)
-                    model.saveToFirestore(farmEntry: farmEntry)
+                    saveFarm.saveToFirestore(farmEntry: farmEntry)
                 }
             }
             else {

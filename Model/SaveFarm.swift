@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Firebase
 
-class Model: ObservableObject {
+class SaveFarm: ObservableObject {
     var db = Firestore.firestore()
     
     func saveToFirestore(farmEntry: FarmEntry) {
