@@ -13,7 +13,7 @@ struct SignUpView: View {
     @State var email  = ""
     @State var password  = ""
     @State var verifyPassword = ""
-    @State var passWordIsVisible = false
+    @State var passwordIsVisible = false
     @State private var keyboardHeight: CGFloat = 100
     var body: some View {
         VStack{
@@ -29,7 +29,7 @@ struct SignUpView: View {
                 .background(Color(.secondarySystemBackground))
             HStack(spacing: 15){
                 
-                if self.passWordIsVisible {
+                if self.passwordIsVisible {
                     TextField("Password", text: $password)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
@@ -40,10 +40,10 @@ struct SignUpView: View {
                         .autocapitalization(.none)
                 }
                 Button(action: {
-                    self.passWordIsVisible.toggle()
+                    self.passwordIsVisible.toggle()
                 },label: {
                     
-                    Image(systemName: self.passWordIsVisible ? "eye.slash.fill" : "eye.fill")
+                    Image(systemName: self.passwordIsVisible ? "eye.slash.fill" : "eye.fill")
                         .foregroundColor(Color.primary)
                     
                 })
@@ -53,7 +53,7 @@ struct SignUpView: View {
             
             HStack(spacing: 15){
                 
-                if self.passWordIsVisible {
+                if self.passwordIsVisible {
                     TextField("Retype Password", text: $verifyPassword)
                         .disableAutocorrection(true)
                         .autocapitalization(.none)
@@ -64,10 +64,10 @@ struct SignUpView: View {
                         .autocapitalization(.none)
                 }
                 Button(action: {
-                    self.passWordIsVisible.toggle()
+                    self.passwordIsVisible.toggle()
                 },label: {
                     
-                    Image(systemName: self.passWordIsVisible ? "eye.slash.fill" : "eye.fill")
+                    Image(systemName: self.passwordIsVisible ? "eye.slash.fill" : "eye.fill")
                         .foregroundColor(Color.primary)
                     
                 })
@@ -85,7 +85,7 @@ struct SignUpView: View {
                     
                 }
                 else{
-                    passWordIsVisible = true
+                    passwordIsVisible = true
                     password = "Type missmatch"
                     verifyPassword = "Type missmatch"
                     
