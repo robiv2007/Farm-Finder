@@ -35,11 +35,12 @@ struct FarmEntryView : View {
                 AsyncImage(url: URL(string: entry.image)){image in
                     image
                         .resizable()
+                        
                         .frame(width: 300, height: 300, alignment: .center)
-                        .scaledToFit()
-                        .clipShape(Circle())
+                        
+                        .clipShape(RoundedRectangle(cornerRadius: 25))
                         .overlay {
-                            Circle().stroke(.white,lineWidth: 4)
+                            RoundedRectangle(cornerRadius: 25).stroke(.white,lineWidth: 4)
                         }
                         .shadow(radius: 7)
                         .offset(y: -130)
@@ -50,9 +51,9 @@ struct FarmEntryView : View {
                         .resizable()
                         .frame(width: 300, height: 300, alignment: .center)
                         .scaledToFit()
-                        .clipShape(Circle())
+                        .clipShape(RoundedRectangle(cornerRadius: 25))
                         .overlay {
-                            Circle().stroke(.white,lineWidth: 4)
+                            RoundedRectangle(cornerRadius: 25).stroke(.white,lineWidth: 4)
                         }
                         .shadow(radius: 7)
                         .offset(y: -130)
@@ -79,8 +80,7 @@ struct FarmEntryView : View {
                 .padding()
                 
                 Spacer()
-                
-                
+                 
             }
         }
     }

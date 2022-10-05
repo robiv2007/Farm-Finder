@@ -86,17 +86,16 @@ struct LoginView: View {
                         .padding()
                 }
                 Text("Or Login with your farm")
-                    .frame(width: 200, height: 20, alignment: .center)
-                    .foregroundColor(Color.white)
-                    .background(Color.green)
-                    .cornerRadius(20)
-                    .padding()
+                    .foregroundColor(Color.secondary)
+                
                 
                 TextField("Email Adress",text: $email)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
                     .padding()
                     .background(Color(.secondarySystemBackground))
+                    .cornerRadius(20)
+                   
                 
                 HStack(spacing: 15){
                     
@@ -104,13 +103,13 @@ struct LoginView: View {
                         TextField("Password", text: $password)
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
-                        
+                          
                     }
                     else {
                         SecureField("Password", text: $password)
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
-                        
+                 
                     }
                     Button(action: {
                         self.visible.toggle()
@@ -122,6 +121,7 @@ struct LoginView: View {
                 }
                 .padding()
                 .background(Color(.secondarySystemBackground))
+                .cornerRadius(25)
                 
                 NavigationLink(destination: EditProfileView(),isActive: $viewModel.anotherView){EmptyView()
                 }
@@ -148,107 +148,6 @@ struct LoginView: View {
     }
 }
 
-struct SignUpView: View {
-    
-    @EnvironmentObject var viewModel : AppViewModel
-    @State var email  = ""
-    @State var password  = ""
-    @State var verifyPassword = ""
-    @State var visible = false
-    @State private var keyboardHeight: CGFloat = 100
-    var body: some View {
-        VStack{
-            Image("logo")
-                .resizable()
-                .position(x: 225, y: 50)
-                .frame(width: 450, height: 300)
-            
-            TextField("Email Adress",text: $email)
-                .disableAutocorrection(true)
-                .autocapitalization(.none)
-                .padding()
-                .background(Color(.secondarySystemBackground))
-            HStack(spacing: 15){
-                
-                if self.visible {
-                    TextField("Password", text: $password)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                }
-                else {
-                    SecureField("Password", text: $password)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                }
-                Button(action: {
-                    self.visible.toggle()
-                },label: {
-                    
-                    Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
-                        .foregroundColor(Color.primary)
-                    
-                })
-            }
-            .padding()
-            .background(Color(.secondarySystemBackground))
-            
-            HStack(spacing: 15){
-                
-                if self.visible {
-                    TextField("Retype Password", text: $verifyPassword)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                }
-                else {
-                    SecureField("Retype Password", text: $verifyPassword)
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                }
-                Button(action: {
-                    self.visible.toggle()
-                },label: {
-                    
-                    Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
-                        .foregroundColor(Color.primary)
-                    
-                })
-            }
-            .padding()
-            .background(Color(.secondarySystemBackground))
-            
-            
-            NavigationLink(destination: LoginView() ,isActive: $viewModel.anotherView){EmptyView()
-            }
-            Button(action: {
-                
-                if password == verifyPassword {
-                    viewModel.signUp(email: email, password: password)
-                    
-                }
-                else{
-                    visible = true
-                    password = "Type missmatch"
-                    verifyPassword = "Type missmatch"
-                    
-                }
-            }, label: {
-                Text("Create Account")
-                    .foregroundColor(Color.white)
-                    .frame(width: 200, height:50)
-                    .background(Color.blue)
-                    .cornerRadius(25)
-                
-            })
-                .padding()
-            Spacer()
-        }
-        .padding()
-        .padding(.bottom,keyboardHeight)
-        .navigationTitle("Register")
-        
-        
-    }
-}
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3422E5D28C62B9F00F82AC8 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3422E5C28C62B9F00F82AC8 /* SignUpView.swift */; };
+		B3422E5F28C62CB600F82AC8 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3422E5E28C62CB600F82AC8 /* EditProfileView.swift */; };
 		B3584577279EAD9900332F2E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3584576279EAD9900332F2E /* ImagePicker.swift */; };
 		B358457A27A00CE600332F2E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B358457927A00CE600332F2E /* FirebaseStorage */; };
 		B386CEBB279808C800936734 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B386CEBA279808C800936734 /* FirebaseAuth */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B3422E5C28C62B9F00F82AC8 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		B3422E5E28C62CB600F82AC8 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		B3584576279EAD9900332F2E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		B367F25727B31F60005EB3BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B386CEC227982AF000936734 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 				B3DAB0FD278ECD1F00CCC029 /* Preview Content */,
 				B3DAB121278ED14800CCC029 /* FarmEntry.swift */,
 				B3DAB16A27919B6200CCC029 /* LoginView.swift */,
+				B3422E5C28C62B9F00F82AC8 /* SignUpView.swift */,
+				B3422E5E28C62CB600F82AC8 /* EditProfileView.swift */,
 			);
 			path = "Farm-Finder";
 			sourceTree = "<group>";
@@ -312,9 +318,11 @@
 				B3DAB12A278EDEBF00CCC029 /* MapView.swift in Sources */,
 				B3DAB124278ED29200CCC029 /* FarmPage.swift in Sources */,
 				B3DAB126278ED5BD00CCC029 /* FarmEntryView.swift in Sources */,
+				B3422E5F28C62CB600F82AC8 /* EditProfileView.swift in Sources */,
 				B3584577279EAD9900332F2E /* ImagePicker.swift in Sources */,
 				B3DAB0FA278ECD1700CCC029 /* ContentView.swift in Sources */,
 				B3DAB12C278EE1FE00CCC029 /* LocationManager.swift in Sources */,
+				B3422E5D28C62B9F00F82AC8 /* SignUpView.swift in Sources */,
 				B3DAB122278ED14800CCC029 /* FarmEntry.swift in Sources */,
 				B3DAB16B27919B6200CCC029 /* LoginView.swift in Sources */,
 				B3DAB0F8278ECD1700CCC029 /* Farm_FinderApp.swift in Sources */,
