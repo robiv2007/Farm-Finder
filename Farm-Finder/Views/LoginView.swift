@@ -8,54 +8,10 @@
 import SwiftUI
 import FirebaseAuth
 
-class AppViewModel: ObservableObject {
-    
-    let auth = Auth.auth()
-    @Published var signedIn = false
-    @Published var anotherView = false
-    @Published var secondView = false
-    
-    var isSignedIn: Bool {
-        return auth.currentUser != nil
-    }
-    
-    func signIn(email: String, password: String){
-        
-        auth.signIn(withEmail: email, password: password) {
-            [weak self] result, error in
-            guard result != nil, error == nil
-            else {
-                return
-            }
-            self?.signedIn = true
-            if self?.signedIn == true{
-                self?.anotherView = true
-            }
-        }
-    }
-    
-    func signUp(email: String, password: String){
-        auth.createUser(withEmail: email, password: password) {
-            [weak self] result, error in
-            guard result != nil, error == nil else {
-                return
-            }
-            
-            self?.signedIn = true
-            if self?.signedIn == true {
-                self?.anotherView = true
-            }
-            
-        }
-    }
-}
 
 struct LoginView: View {
-    
-    @State var email  = ""
-    @State var password  = ""
-    @State var visible = false
-    @EnvironmentObject var viewModel : AppViewModel
+
+    @StateObject var vm = LoginViewModel()
     @State private var keyboardHeight: CGFloat = 140
     
     var body: some View {
@@ -71,51 +27,52 @@ struct LoginView: View {
                     .overlay {
                         Text("Farm Finder")
                             .font(.largeTitle)
-                            .offset(y: 100)
-                            .foregroundColor(.blue)
+                            .bold()
+                            .offset(y: 85)
+                            .padding()
+                            
                     }
                 
                 NavigationLink(destination: ContentView())
                 {
                     Text("Browse the farms")
                         .foregroundColor(Color.white)
-                        .frame(width: 300, height: 70)
+                        .frame(width: 300, height: 50)
                         .font(.title2)
                         .background(Color.blue)
                         .cornerRadius(25)
                         .padding()
                 }
                 Text("Or Login with your farm")
-                    .foregroundColor(Color.secondary)
+                    //.foregroundColor(Color.secondary)
                 
                 
-                TextField("Email Adress",text: $email)
+                TextField("Email Adress",text: $vm.email)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
                     .padding()
                     .background(Color(.secondarySystemBackground))
                     .cornerRadius(20)
                    
-                
                 HStack(spacing: 15){
                     
-                    if self.visible {
-                        TextField("Password", text: $password)
+                    if vm.visible {
+                        TextField("Password", text: $vm.password)
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
                           
                     }
                     else {
-                        SecureField("Password", text: $password)
+                        SecureField("Password", text: $vm.password)
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
                  
                     }
                     Button(action: {
-                        self.visible.toggle()
+                        vm.visible.toggle()
                     },label: {
                         
-                        Image(systemName: self.visible ? "eye.slash.fill" : "eye.fill")
+                        Image(systemName: vm.visible ? "eye.slash.fill" : "eye.fill")
                             .foregroundColor(Color.primary)
                     })
                 }
@@ -123,11 +80,11 @@ struct LoginView: View {
                 .background(Color(.secondarySystemBackground))
                 .cornerRadius(25)
                 
-                NavigationLink(destination: EditProfileView(),isActive: $viewModel.anotherView){EmptyView()
+                NavigationLink(destination: EditProfileView(),isActive: $vm.anotherView){EmptyView()
                 }
                 Button(action: {
                     
-                    viewModel.signIn(email: email, password: password)
+                    vm.signIn(email: vm.email, password: vm.password)
                     
                 }, label: {
                     Text("Login")
@@ -143,7 +100,7 @@ struct LoginView: View {
             }
             .padding()
             .padding(.bottom,keyboardHeight)
-            .navigationTitle("Login Page")
+            //.navigationTitle("Login Page")
         }
     }
 }
@@ -151,6 +108,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        LoginView()
     }
 }

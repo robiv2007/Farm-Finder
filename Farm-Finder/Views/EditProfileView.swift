@@ -13,28 +13,19 @@ import MapKit
 
 
 struct EditProfileView : View {
-    @EnvironmentObject var viewModel : AppViewModel
-    
-    var db = Firestore.firestore()
-    @State var showActionSheet = false
-    @State var showImagePicker = false
-    @State var anotherView = false
-    @State var secondView = false
-    @State var sourceType: UIImagePickerController.SourceType = .camera
-    @State var uploadImage : UIImage?
-    @State var descriptionText : String = ""
-    @State var nameFieldText : String = ""
-    @State var locationTextField : String = ""
-    @State private var imageURL = URL(string:"")
-    @State private var showingSheet = false
+    //@EnvironmentObject var viewModel : LoginViewModel
+    @StateObject var vm = EditProfileVIewModel()
     @State var entry: FarmEntry? = nil
+    
+    
+    
     @ObservedObject private var locationManager = LocationManager()
     @State var tapped = false
     
     var tap: some Gesture {
         TapGesture(count: 1)
             .onEnded { _ in self.tapped = !self.tapped
-                showingSheet = false
+                vm.showingSheet = false
             }
     }
     init() {
@@ -45,12 +36,12 @@ struct EditProfileView : View {
         ScrollView {
             VStack{
                 Button(action: {
-                    self.showActionSheet = true
+                    vm.showActionSheet = true
                     print("ADD PICTURE")
                 }
                        , label: {
-                    if uploadImage != nil {
-                        Image(uiImage: uploadImage!)
+                    if vm.uploadImage != nil {
+                        Image(uiImage: vm.uploadImage!)
                             .resizable()
                             .frame(width: .infinity, height: 300)
                             .clipShape(RoundedRectangle(cornerRadius: 25))
@@ -78,47 +69,47 @@ struct EditProfileView : View {
                         }
                     }
                     
-                }).actionSheet(isPresented: $showActionSheet){
+                }).actionSheet(isPresented: $vm.showActionSheet){
                     ActionSheet(title: Text("Add a picture to the profile"), message: nil, buttons: [
                         
                         .default(Text("Camera"),action: {
-                            self.showImagePicker = true
-                            self.sourceType = .camera
+                            vm.showImagePicker = true
+                            vm.sourceType = .camera
                         }),
                         .default(Text("Photo library"), action: {
-                            self.showImagePicker = true
-                            self.sourceType = .photoLibrary
+                            vm.showImagePicker = true
+                            vm.sourceType = .photoLibrary
                         }),
                         .cancel()
                     ])
                 }
-                .sheet(isPresented: $showImagePicker){
-                    imagePicker(image: self.$uploadImage, showImagePicker:
-                                    self.$showImagePicker, sourceType:
-                                    self.sourceType)
+                .sheet(isPresented: $vm.showImagePicker){
+                    imagePicker(image: $vm.uploadImage, showImagePicker:
+                                    $vm.showImagePicker, sourceType:
+                                    vm.sourceType)
                 }
                 
                 Text("Add a picture ")
                 if entry != nil {
-                    TextField("Farm Name",text: $nameFieldText)
+                    TextField("Farm Name",text: $vm.nameFieldText)
                         .font(.headline)
                         .padding(10)
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(20)
                 }
                 if entry != nil {
-                    TextField("City",text: $locationTextField)
+                    TextField("City",text: $vm.locationTextField)
                         .font(.headline)
                         .padding(10)
                         .background(Color(.secondarySystemBackground))
                         .cornerRadius(20)
                 }
                 Button("Save location on map") {
-                    showingSheet.toggle()
+                    vm.showingSheet.toggle()
                 }
                 
                 
-                .sheet(isPresented: $showingSheet){
+                .sheet(isPresented: $vm.showingSheet){
                     if let entry = entry {
                         
                         MapView(coordinate: coordinate, entry: entry)
@@ -137,7 +128,7 @@ struct EditProfileView : View {
                         Button(action: {
                             self.entry?.latitude = coordinate.latitude
                             self.entry?.longitude = coordinate.longitude
-                            showingSheet = false
+                            vm.showingSheet = false
                         }, label: {
                             Text("Save Location")
                                 .font(.title)
@@ -158,20 +149,20 @@ struct EditProfileView : View {
                             RoundedRectangle(cornerRadius: 20, style: .continuous)
                                 .fill(Color(UIColor.secondarySystemBackground))
                             
-                            if descriptionText.isEmpty {
+                            if vm.descriptionText.isEmpty {
                                 Text("Write here")
                                     .foregroundColor(Color(UIColor.placeholderText))
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 12)
                             } else {
-                                TextEditor(text: $descriptionText)
+                                TextEditor(text: $vm.descriptionText)
                                     .font(.body)
                                     .frame(width: 400, height: 250, alignment: .topLeading)
                                     .disableAutocorrection(true)
                             }
                             
                             if entry?.content == "" {
-                                TextEditor(text: $descriptionText)
+                                TextEditor(text: $vm.descriptionText)
                                     .font(.body)
                                     .frame(width: 400, height: 250, alignment: .topLeading)
                                     .disableAutocorrection(true)
@@ -182,14 +173,14 @@ struct EditProfileView : View {
                 }
                 
                 Button(action: {
-                    if let image = self.uploadImage {
+                    if let image = vm.uploadImage {
                         uploadTheImage(image: image)
-                        secondView = true
+                        vm.secondView = true
                         
                     }else{
                         print("error in upload")
-                        saveToFirestore()
-                        secondView = true
+                        vm.saveToFirestore()
+                        vm.secondView = true
                     }
                     
                 }, label: {
@@ -200,7 +191,7 @@ struct EditProfileView : View {
                         .cornerRadius(25)
                 })
                 Spacer()
-                NavigationLink(destination: ContentView() ,isActive: $secondView) {EmptyView()}
+                NavigationLink(destination: ContentView() ,isActive: $vm.secondView) {EmptyView()}
                 
             }
             .padding()
@@ -212,7 +203,7 @@ struct EditProfileView : View {
             self.entry = FarmEntry(owner: uid ,name: "", content: "", image: "",location: "", latitude: 0.0, longitude: 0.0)
             
             print("EMPTY ENTRY:NAME")
-            db.collection("farms").whereField("owner", isEqualTo: uid).getDocuments() {
+            vm.db.collection("farms").whereField("owner", isEqualTo: uid).getDocuments() {
                 snapshot, err in
                 print("DB Collection")
                 guard let snapshot = snapshot else{ print("Snapshot")
@@ -230,14 +221,14 @@ struct EditProfileView : View {
                             if let item = item {
                                 print("item")
                                 self.entry = item
-                                if nameFieldText == "" {
-                                    changeValue()
+                                if vm.nameFieldText == "" {
+                                    vm.changeValue()
                                 }
-                                if descriptionText == "" {
-                                    changeValue()
+                                if vm.descriptionText == "" {
+                                    vm.changeValue()
                                 }
-                                if locationTextField == "" {
-                                    changeValue()
+                                if vm.locationTextField == "" {
+                                    vm.changeValue()
                                 }
                             } else {
                                 print("Document does not exist")
@@ -246,9 +237,7 @@ struct EditProfileView : View {
                         case.failure(let error) :
                             print("Error decoding item \(error)")
                         }
-                        
                     }
-                    
                 }
             }
         }
@@ -267,31 +256,14 @@ struct EditProfileView : View {
             metaData, error in
             if error == nil , metaData != nil {
                 storageRef.downloadURL {url, error in
-                    self.imageURL = url
-                    saveToFirestore()
+                    vm.imageURL = url
+                    vm.saveToFirestore()
                 }
             }
             else {
                 print("ERROR IN UPLOAD IMAGE FUNC")
                 
             }
-        }
-    }
-    func changeValue(){
-        nameFieldText = entry?.name ?? "Farm Name"
-        descriptionText = entry?.content ?? "Description of your farm"
-        locationTextField = entry?.location ?? "City"
-    }
-    func saveToFirestore() {
-        print("save 1")
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let user = FarmEntry(owner: uid, name: nameFieldText, content: descriptionText, image : imageURL?.absoluteString ?? entry?.image as! String,location: locationTextField , latitude: entry?.latitude ?? 59.11966, longitude: entry?.longitude ?? 18.11518)
-        
-        do {
-            _ = try db.collection("farms").document(uid).setData(from: user)
-            
-        } catch {
-            print("Error in saving the data")
         }
     }
 }
