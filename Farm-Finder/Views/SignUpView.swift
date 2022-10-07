@@ -12,7 +12,7 @@ import FirebaseAuth
 
 struct SignUpView: View {
     
-    @EnvironmentObject var viewModel : AppViewModel
+    @StateObject var vm = LoginViewModel()
     @State var email  = ""
     @State var password  = ""
     @State var verifyPassword = ""
@@ -79,12 +79,12 @@ struct SignUpView: View {
             .background(Color(.secondarySystemBackground))
             
             
-            NavigationLink(destination: LoginView() ,isActive: $viewModel.anotherView){EmptyView()
+            NavigationLink(destination: LoginView() ,isActive: $vm.anotherView){EmptyView()
             }
             Button(action: {
                 
                 if password == verifyPassword {
-                    viewModel.signUp(email: email, password: password)
+                    vm.signUp(email: email, password: password)
                     
                 }
                 else{

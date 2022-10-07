@@ -15,13 +15,7 @@ struct Farm_FinderApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var body: some Scene {
         WindowGroup {
-            let viewModel = AppViewModel()
-            
             LoginView()
-                .environmentObject(viewModel)
-            //EditProfileView()
-           
-          
 
         }
     }

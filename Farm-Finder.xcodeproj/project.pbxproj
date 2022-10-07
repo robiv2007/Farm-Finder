@@ -28,6 +28,8 @@
 		B3DAB12A278EDEBF00CCC029 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB129278EDEBF00CCC029 /* MapView.swift */; };
 		B3DAB12C278EE1FE00CCC029 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB12B278EE1FE00CCC029 /* LocationManager.swift */; };
 		B3DAB16B27919B6200CCC029 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DAB16A27919B6200CCC029 /* LoginView.swift */; };
+		B3F60CD828F0142A002A5CEB /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F60CD728F0142A002A5CEB /* LoginViewModel.swift */; };
+		B3F60CDC28F017C5002A5CEB /* EditProfleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F60CDB28F017C5002A5CEB /* EditProfleViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		B3DAB129278EDEBF00CCC029 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		B3DAB12B278EE1FE00CCC029 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B3DAB16A27919B6200CCC029 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B3F60CD728F0142A002A5CEB /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		B3F60CDB28F017C5002A5CEB /* EditProfleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfleViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,18 +138,14 @@
 		B3DAB0F6278ECD1700CCC029 /* Farm-Finder */ = {
 			isa = PBXGroup;
 			children = (
+				B3F60CDA28F016E6002A5CEB /* Models */,
+				B3F60CD928F01689002A5CEB /* Views */,
+				B3F60CD628F01406002A5CEB /* ViewModels */,
 				B367F25727B31F60005EB3BF /* Info.plist */,
 				B3DAB0F7278ECD1700CCC029 /* Farm_FinderApp.swift */,
-				B3DAB0F9278ECD1700CCC029 /* ContentView.swift */,
 				B3584576279EAD9900332F2E /* ImagePicker.swift */,
-				B3DAB125278ED5BD00CCC029 /* FarmEntryView.swift */,
-				B3DAB123278ED29200CCC029 /* FarmPage.swift */,
 				B3DAB0FB278ECD1F00CCC029 /* Assets.xcassets */,
 				B3DAB0FD278ECD1F00CCC029 /* Preview Content */,
-				B3DAB121278ED14800CCC029 /* FarmEntry.swift */,
-				B3DAB16A27919B6200CCC029 /* LoginView.swift */,
-				B3422E5C28C62B9F00F82AC8 /* SignUpView.swift */,
-				B3422E5E28C62CB600F82AC8 /* EditProfileView.swift */,
 			);
 			path = "Farm-Finder";
 			sourceTree = "<group>";
@@ -173,6 +173,36 @@
 				B3DAB114278ECD2100CCC029 /* Farm_FinderUITestsLaunchTests.swift */,
 			);
 			path = "Farm-FinderUITests";
+			sourceTree = "<group>";
+		};
+		B3F60CD628F01406002A5CEB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B3F60CD728F0142A002A5CEB /* LoginViewModel.swift */,
+				B3F60CDB28F017C5002A5CEB /* EditProfleViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B3F60CD928F01689002A5CEB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B3DAB125278ED5BD00CCC029 /* FarmEntryView.swift */,
+				B3DAB16A27919B6200CCC029 /* LoginView.swift */,
+				B3422E5C28C62B9F00F82AC8 /* SignUpView.swift */,
+				B3DAB0F9278ECD1700CCC029 /* ContentView.swift */,
+				B3422E5E28C62CB600F82AC8 /* EditProfileView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B3F60CDA28F016E6002A5CEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B3DAB121278ED14800CCC029 /* FarmEntry.swift */,
+				B3DAB123278ED29200CCC029 /* FarmPage.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,9 +353,11 @@
 				B3DAB0FA278ECD1700CCC029 /* ContentView.swift in Sources */,
 				B3DAB12C278EE1FE00CCC029 /* LocationManager.swift in Sources */,
 				B3422E5D28C62B9F00F82AC8 /* SignUpView.swift in Sources */,
+				B3F60CD828F0142A002A5CEB /* LoginViewModel.swift in Sources */,
 				B3DAB122278ED14800CCC029 /* FarmEntry.swift in Sources */,
 				B3DAB16B27919B6200CCC029 /* LoginView.swift in Sources */,
 				B3DAB0F8278ECD1700CCC029 /* Farm_FinderApp.swift in Sources */,
+				B3F60CDC28F017C5002A5CEB /* EditProfleViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

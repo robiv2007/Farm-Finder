@@ -16,7 +16,6 @@ struct ContentView: View {
     @State var farms = [FarmEntry]()
     var columns = [
         GridItem(.adaptive(minimum: 400)),
-        //GridItem(.adaptive(minimum: 200))
     ]
     
     var body: some View {
@@ -60,12 +59,6 @@ struct ContentView: View {
                     .cornerRadius(20)
                 }
             }
-            
-            //.listRowInsets(.init(top: 5, leading: 10, bottom: 5, trailing: 10))
-//            .background(Color.clear)
-//            .padding(5)
-//            .cornerRadius(20)
-        
           }
         }
         .onAppear(){
